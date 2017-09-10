@@ -1,4 +1,4 @@
-// Copyright 2016-2017 The qurl Authors. All rights reserved.
+// Copyright 2017 The qurl Authors. All rights reserved.
 package routes
 
 import (

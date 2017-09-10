@@ -15,6 +15,7 @@ func Start(address string, port string) {
 	e.DisableHTTP2 = true
 
 	e.GET("/teapot", routes.TeaPot)
+	e.GET("/q", routes.Query)
 
 	// Start server
 	serveraddress := fmt.Sprintf("%s:%s", address, port)
