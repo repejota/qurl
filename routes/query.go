@@ -5,19 +5,30 @@
 package routes
 
 import (
-	"log"
 	"net/http"
+	"net/url"
 
 	"github.com/labstack/echo"
 )
 
+// Response is the type that defines a query result.
+type Response struct {
+	URL    string `json:"url"`
+	Status int    `json:"status"`
+}
+
 // Query fetch an URL and returns JSON with the data obtained.
 func Query(c echo.Context) error {
-	url := c.QueryParam("url")
+	result := &Response{}
+	result.Status = http.StatusOK
 
-	log.Println(url)
+	// Validate URL
+	u := c.QueryParam("url")
+	_, err := url.ParseRequestURI(u)
+	if err != nil {
+		result.Status = http.StatusBadRequest
+	}
 
-	var result struct{}
-
-	return c.JSON(http.StatusOK, result)
+	result.URL = u
+	return c.JSON(result.Status, result)
 }
