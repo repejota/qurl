@@ -23,7 +23,7 @@ clean:
 	rm -rf coverage-all.out
 
 # Testing
-z
+
 .PHONY: test
 test:
 	go test -v $(PACKAGES)
