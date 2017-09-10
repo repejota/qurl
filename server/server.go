@@ -5,8 +5,8 @@ package server
 import (
 	"fmt"
 
-	"bitbucket.org/ssgaas/api/routes"
 	"github.com/labstack/echo"
+	"github.com/repejota/qurl/routes"
 )
 
 // Start starts the HTTP server for the qurl API microservice.
