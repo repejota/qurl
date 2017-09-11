@@ -1,7 +1,6 @@
 // Copyright 2017 The qurl Authors. All rights reserved.
 
 // Package routes implements all the HTTP entry points for this microservice.
-
 package routes
 
 import (
@@ -13,15 +12,24 @@ import (
 
 // Response is the type that defines a query result.
 type Response struct {
-	URL    string `json:"url"`
-	Status int    `json:"status"`
+	URL     string              `json:"url"`
+	Status  int                 `json:"status"`
+	Headers map[string][]string `json:"headers,omitempty"`
+}
+
+// NewResponse ...
+func NewResponse() *Response {
+	r := &Response{}
+	r.Headers = make(map[string][]string)
+	return r
 }
 
 // Query fetch an URL and returns JSON with the data obtained.
 func Query(c echo.Context) error {
-	u := c.QueryParam("url")
+	queryParams := c.QueryParams()
+	u := queryParams.Get("url")
 
-	result := &Response{}
+	result := NewResponse()
 	result.URL = u
 	result.Status = http.StatusOK
 
@@ -38,7 +46,11 @@ func Query(c echo.Context) error {
 		result.Status = http.StatusInternalServerError
 		return c.JSON(result.Status, result)
 	}
-	defer response.Body.Close()
+
+	// Process headers
+	for _, v := range queryParams["header"] {
+		result.Headers[v] = response.Header[v]
+	}
 
 	return c.JSON(result.Status, result)
 }
