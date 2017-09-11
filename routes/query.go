@@ -8,28 +8,15 @@ import (
 	"net/url"
 
 	"github.com/labstack/echo"
+	"github.com/repejota/qurl"
 )
-
-// Response is the type that defines a query result.
-type Response struct {
-	URL     string              `json:"url"`
-	Status  int                 `json:"status"`
-	Headers map[string][]string `json:"headers,omitempty"`
-}
-
-// NewResponse ...
-func NewResponse() *Response {
-	r := &Response{}
-	r.Headers = make(map[string][]string)
-	return r
-}
 
 // Query fetch an URL and returns JSON with the data obtained.
 func Query(c echo.Context) error {
 	queryParams := c.QueryParams()
 	u := queryParams.Get("url")
 
-	result := NewResponse()
+	result := qurl.NewResponse()
 	result.URL = u
 	result.Status = http.StatusOK
 
