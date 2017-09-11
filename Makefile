@@ -50,6 +50,7 @@ lint:
 
 deps:
 	go get -u github.com/labstack/echo
+	go get -u github.com/PuerkitoBio/goquery
 
 dev-deps:
 	go get -u github.com/alecthomas/gometalinter
