@@ -7,8 +7,8 @@
 
 * [Introduction](https://github.com/repejota/qurl#introduction)
 * [Continuous Integration](https://github.com/repejota/qurl#continuous-integration)
-	* [Tests](https://github.com/repejota/qurl#license)
-	* [Coverage](https://github.com/repejota/qurl#coverage)
+  * [Tests](https://github.com/repejota/qurl#license)
+  * [Coverage](https://github.com/repejota/qurl#coverage)
 * [License](https://github.com/repejota/qurl#license)
 
 ## Introduction
