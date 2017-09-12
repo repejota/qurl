@@ -12,4 +12,4 @@ A drop-in microservice to query URLs and fetch information and data.
 ### Coverage
 
 * Develop: [![Coverage Status](https://coveralls.io/repos/github/repejota/qurl/badge.svg?branch=develop)](https://coveralls.io/github/repejota/qurl?branch=develop)
-* Master: * Develop: [![Coverage Status](https://coveralls.io/repos/github/repejota/qurl/badge.svg?branch=master)](https://coveralls.io/github/repejota/qurl?branch=master)
+* Master: [![Coverage Status](https://coveralls.io/repos/github/repejota/qurl/badge.svg?branch=master)](https://coveralls.io/github/repejota/qurl?branch=master)
