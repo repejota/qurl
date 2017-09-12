@@ -7,13 +7,13 @@
 
 * [Introduction](https://github.com/repejota/qurl#introduction)
 * [Continuous Integration](https://github.com/repejota/qurl#continuous-integration)
-	* [Tests](https://github.com/repejota/qurl#license)
-	* [Coverage](https://github.com/repejota/qurl#coverage)
+  * [Tests](https://github.com/repejota/qurl#license)
+  * [Coverage](https://github.com/repejota/qurl#coverage)
 * [License](https://github.com/repejota/qurl#license)
 
 ## Introduction
 
-Qurl is an drop-in and easy to deploy microservice that implements an HTTP API you can use to extract content from any web page as JSON any information available at a given public URL (check examples below).
+Qurl is a drop-in and easy to deploy microservice who exposes an HTTP API you can use to extract content from any web page as JSON. Any information available at a given public URL can be extracted using selector queries (check examples below).
 
 ## Continuous integration
 
