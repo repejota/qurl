@@ -13,7 +13,7 @@
 
 ## Introduction
 
-Qurl is an drop-in and easy to deploy microservice that implements an HTTP API you can use to extract content from any web page as JSON any information available at a given public URL (check examples below).
+Qurl is a drop-in and easy to deploy microservice who exposes an HTTP API you can use to extract content from any web page as JSON. Any information available at a given public URL can be extracted using selector queries (check examples below).
 
 ## Continuous integration
 
