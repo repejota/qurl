@@ -4,14 +4,16 @@ package qurl
 
 // Response is the type that defines a query result.
 type Response struct {
-	URL     string              `json:"url"`
-	Status  int                 `json:"status"`
-	Headers map[string][]string `json:"headers,omitempty"`
+	URL       string              `json:"url"`
+	Status    int                 `json:"status"`
+	Headers   map[string][]string `json:"headers,omitempty"`
+	Selectors map[string][]string `json:"selectors,omitempty"`
 }
 
 // NewResponse returns a response instance.
 func NewResponse() *Response {
 	r := &Response{}
 	r.Headers = make(map[string][]string)
+	r.Selectors = make(map[string][]string)
 	return r
 }
