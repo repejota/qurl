@@ -4,20 +4,23 @@ package server
 
 import (
 	"fmt"
+	"net/http"
 
-	"github.com/labstack/echo"
 	"github.com/repejota/qurl/routes"
 )
 
+// QURLService ...
+type QURLService struct {
+	URL string
+}
+
 // Start starts the HTTP server for the qurl API microservice.
 func Start(address string, port string) {
-	e := echo.New()
-	e.DisableHTTP2 = true
 
-	e.GET("/teapot", routes.TeaPot)
-	e.GET("/q", routes.Query)
+	http.HandleFunc("/teapot", routes.TeaPot)
+	http.HandleFunc("/q", routes.Query)
 
 	// Start server
 	serveraddress := fmt.Sprintf("%s:%s", address, port)
-	e.Logger.Fatal(e.Start(serveraddress))
+	http.ListenAndServe(serveraddress, nil)
 }

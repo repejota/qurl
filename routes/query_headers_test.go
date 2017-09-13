@@ -2,16 +2,7 @@
 
 package routes
 
-import (
-	"encoding/json"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-
-	"github.com/labstack/echo"
-	"github.com/repejota/qurl"
-)
-
+/*
 func TestHTTPHeaderNotPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=https://www.example.com&header=foobar", nil)
 	if err != nil {
@@ -63,3 +54,4 @@ func TestHTTPHeaderPresent(t *testing.T) {
 		t.Fatalf("Response header 'Content-Type' expected to have one element but got %v", response.Headers["Content-Type"])
 	}
 }
+*/
