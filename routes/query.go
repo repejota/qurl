@@ -34,23 +34,14 @@ func Query(w http.ResponseWriter, r *http.Request) {
 	}
 	defer response.Body.Close()
 
-	resultJSON, err := json.Marshal(result)
-	if err != nil {
-		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
-		return
+	queryParams := r.URL.Query()
+
+	// Process headers
+	for _, v := range queryParams["header"] {
+		result.Headers[v] = response.Header[v]
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write(resultJSON)
 	/*
-		queryParams := c.QueryParams()
-
-		// Process headers
-		for _, v := range queryParams["header"] {
-			result.Headers[v] = response.Header[v]
-		}
-
 		// Process selectors
 		doc, err := goquery.NewDocumentFromReader(response.Body)
 		if err != nil {
@@ -63,4 +54,14 @@ func Query(w http.ResponseWriter, r *http.Request) {
 
 		return c.JSON(result.Status, result)
 	*/
+
+	resultJSON, err := json.Marshal(result)
+	if err != nil {
+		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(resultJSON)
 }

@@ -2,19 +2,12 @@
 package routes
 
 import (
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 func TestQuery(t *testing.T) {
-	go func() {
-		http.HandleFunc("/q", func(w http.ResponseWriter, r *http.Request) {
-		})
-		log.Println(http.ListenAndServe(":6060", nil))
-	}()
-
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060", nil)
 	if err != nil {
 		t.Fatal(err)
