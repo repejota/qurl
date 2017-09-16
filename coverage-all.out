@@ -1,0 +1,19 @@
+mode: count
+github.com/repejota/qurl/response.go:14.30,19.2 4 1
+github.com/repejota/qurl/response.go:14.30,19.2 4 1
+github.com/repejota/qurl/routes/query.go:15.52,24.16 6 1
+github.com/repejota/qurl/routes/query.go:30.2,31.16 2 1
+github.com/repejota/qurl/routes/query.go:35.2,38.16 3 1
+github.com/repejota/qurl/routes/query.go:43.2,45.21 3 1
+github.com/repejota/qurl/routes/query.go:24.16,27.3 2 0
+github.com/repejota/qurl/routes/query.go:31.16,34.3 2 0
+github.com/repejota/qurl/routes/query.go:38.16,41.3 2 0
+github.com/repejota/qurl/routes/teapot.go:12.53,15.2 2 1
+github.com/repejota/qurl/routes/query.go:15.52,24.16 6 1
+github.com/repejota/qurl/routes/query.go:30.2,31.16 2 1
+github.com/repejota/qurl/routes/query.go:35.2,38.16 3 1
+github.com/repejota/qurl/routes/query.go:43.2,45.21 3 1
+github.com/repejota/qurl/routes/query.go:24.16,27.3 2 0
+github.com/repejota/qurl/routes/query.go:31.16,34.3 2 0
+github.com/repejota/qurl/routes/query.go:38.16,41.3 2 0
+github.com/repejota/qurl/routes/teapot.go:12.53,15.2 2 1
