@@ -58,6 +58,6 @@ func TestHTTPHeaderPresent(t *testing.T) {
 	}
 
 	if len(response.Headers["Fooo"]) != 1 {
-		t.Fatalf("Response header 'fooo' expected to have one element but got %v", response.Headers["Fooo"])
+		t.Fatalf("Response header 'Fooo' expected to have one element but got %v", response.Headers["Fooo"])
 	}
 }
