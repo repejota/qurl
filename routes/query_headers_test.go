@@ -8,24 +8,26 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/labstack/echo"
 	"github.com/repejota/qurl"
 )
 
 func TestHTTPHeaderNotPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=https://www.example.com&header=foobar", nil)
+	go func() {
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Fooo", "bar")
+		})
+		http.ListenAndServe(":6060", nil)
+	}()
+
+	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&header=foobar", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rec := httptest.NewRecorder()
+	handler := http.HandlerFunc(Query)
 
-	e := echo.New()
-	c := e.NewContext(req, rec)
-	err = Query(c)
-	if err != nil {
-		t.Fatalf("Query() failed %v", err)
-	}
+	handler.ServeHTTP(rec, req)
 
 	var response qurl.Response
 	err = json.Unmarshal(rec.Body.Bytes(), &response)
@@ -33,25 +35,21 @@ func TestHTTPHeaderNotPresent(t *testing.T) {
 		t.Fatalf("Unmarshaling response failed %v", err)
 	}
 
-	if len(response.Headers["foobar"]) != 0 {
-		t.Fatalf("Response header 'foobar' expected to be an empty slice but got %v", response.Headers["foobar"])
+	if len(response.Headers["Foobar"]) != 0 {
+		t.Fatalf("Response header 'Foobar' expected to be an empty slice but got %v", response.Headers["Foobar"])
 	}
 }
 
 func TestHTTPHeaderPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=https://www.example.com&header=Content-Type", nil)
+	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&header=Fooo", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rec := httptest.NewRecorder()
+	handler := http.HandlerFunc(Query)
 
-	e := echo.New()
-	c := e.NewContext(req, rec)
-	err = Query(c)
-	if err != nil {
-		t.Fatalf("Query() failed %v", err)
-	}
+	handler.ServeHTTP(rec, req)
 
 	var response qurl.Response
 	err = json.Unmarshal(rec.Body.Bytes(), &response)
@@ -59,7 +57,7 @@ func TestHTTPHeaderPresent(t *testing.T) {
 		t.Fatalf("Unmarshaling response failed %v", err)
 	}
 
-	if len(response.Headers["Content-Type"]) != 1 {
-		t.Fatalf("Response header 'Content-Type' expected to have one element but got %v", response.Headers["Content-Type"])
+	if len(response.Headers["Fooo"]) != 1 {
+		t.Fatalf("Response header 'fooo' expected to have one element but got %v", response.Headers["Fooo"])
 	}
 }

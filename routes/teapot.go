@@ -4,12 +4,12 @@
 package routes
 
 import (
+	"io"
 	"net/http"
-
-	"github.com/labstack/echo"
 )
 
 // TeaPot is the dummy route responds with an HTTP 418 Teapot code.
-func TeaPot(c echo.Context) error {
-	return c.String(http.StatusTeapot, "I'm a teapot!")
+func TeaPot(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusTeapot)
+	io.WriteString(w, "I'm a Teapot!")
 }
