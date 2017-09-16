@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/labstack/echo"
 )
 
 func TestTeaPot(t *testing.T) {
@@ -20,13 +18,11 @@ func TestTeaPot(t *testing.T) {
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to
 	// record the response.
 	rec := httptest.NewRecorder()
+	handler := http.HandlerFunc(TeaPot)
 
-	e := echo.New()
-	c := e.NewContext(req, rec)
-	err = TeaPot(c)
-	if err != nil {
-		t.Fatalf("Teapot() failed %v", err)
-	}
+	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
+	// directly and pass in our Request and ResponseRecorder.
+	handler.ServeHTTP(rec, req)
 
 	// Check the status code is what we expect.
 	if status := rec.Code; status != http.StatusTeapot {
@@ -34,7 +30,7 @@ func TestTeaPot(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := "I'm a teapot!"
+	expected := "I'm a Teapot!"
 	if rec.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v", rec.Body.String(), expected)
 	}

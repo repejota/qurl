@@ -4,18 +4,16 @@
 package routes
 
 import (
+	"encoding/json"
 	"net/http"
 	"net/url"
 
-	"github.com/PuerkitoBio/goquery"
-	"github.com/labstack/echo"
 	"github.com/repejota/qurl"
 )
 
 // Query fetch an URL and returns JSON with the data obtained.
-func Query(c echo.Context) error {
-	queryParams := c.QueryParams()
-	u := queryParams.Get("url")
+func Query(w http.ResponseWriter, r *http.Request) {
+	u := r.URL.Query().Get("url")
 
 	result := qurl.NewResponse()
 	result.URL = u
@@ -24,32 +22,46 @@ func Query(c echo.Context) error {
 	// Validate URL
 	_, err := url.ParseRequestURI(u)
 	if err != nil {
-		result.Status = http.StatusBadRequest
-		return c.JSON(result.Status, result)
+		http.Error(w, "INVALID_URL", http.StatusBadRequest)
+		return
 	}
 
 	// Fetch URL content
 	response, err := http.Get(u)
 	if err != nil {
-		result.Status = http.StatusInternalServerError
-		return c.JSON(result.Status, result)
+		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
+		return
 	}
 	defer response.Body.Close()
+
+	queryParams := r.URL.Query()
 
 	// Process headers
 	for _, v := range queryParams["header"] {
 		result.Headers[v] = response.Header[v]
 	}
 
-	// Process selectors
-	doc, err := goquery.NewDocumentFromReader(response.Body)
-	if err != nil {
-		result.Status = http.StatusInternalServerError
+	/*
+		// Process selectors
+		doc, err := goquery.NewDocumentFromReader(response.Body)
+		if err != nil {
+			result.Status = http.StatusInternalServerError
+			return c.JSON(result.Status, result)
+		}
+		for _, v := range queryParams["selector"] {
+			result.Selectors[v] = append(result.Selectors[v], doc.Find(v).Text())
+		}
+
 		return c.JSON(result.Status, result)
-	}
-	for _, v := range queryParams["selector"] {
-		result.Selectors[v] = append(result.Selectors[v], doc.Find(v).Text())
+	*/
+
+	resultJSON, err := json.Marshal(result)
+	if err != nil {
+		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
+		return
 	}
 
-	return c.JSON(result.Status, result)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(resultJSON)
 }
