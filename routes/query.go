@@ -49,7 +49,10 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, v := range queryParams["selector"] {
-		result.Selectors[v] = append(result.Selectors[v], doc.Find(v).Text())
+		selection := doc.Find(v)
+		if selection.Size() > 0 {
+			result.Selectors[v] = append(result.Selectors[v], selection.Text())
+		}
 	}
 
 	resultJSON, err := json.Marshal(result)

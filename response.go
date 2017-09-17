@@ -10,6 +10,11 @@ type Response struct {
 	Selectors map[string][]string `json:"selectors,omitempty"`
 }
 
+// Element represents an HTML element from a selector coincidence.
+type Element struct {
+	Text string
+}
+
 // NewResponse returns a response instance.
 func NewResponse() *Response {
 	r := &Response{}
