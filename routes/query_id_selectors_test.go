@@ -12,7 +12,7 @@ import (
 )
 
 func TestIDSelectorNotPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=#unexistentid", nil)
+	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=%23unexistentid", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34,7 +34,7 @@ func TestIDSelectorNotPresent(t *testing.T) {
 }
 
 func TestIDSelectorPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=#idname", nil)
+	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=%23idname", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -49,8 +49,6 @@ func TestIDSelectorPresent(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unmarshaling response failed %v", err)
 	}
-
-	t.Log(response.Selectors)
 
 	if len(response.Selectors["#idname"]) != 1 {
 		t.Fatalf("Response selector '#idname' expected to have one element but got '%v'", response.Selectors["#idname"])

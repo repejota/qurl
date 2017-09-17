@@ -5,7 +5,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 
@@ -50,8 +49,6 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, v := range queryParams["selector"] {
-		fmt.Println(queryParams)
-		fmt.Println(v)
 		selection := doc.Find(v)
 		if selection.Size() > 0 {
 			result.Selectors[v] = append(result.Selectors[v], selection.Text())
