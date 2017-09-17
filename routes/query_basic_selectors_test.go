@@ -12,7 +12,7 @@ import (
 	"github.com/repejota/qurl"
 )
 
-func TestTypeSelectorNotPresent(t *testing.T) {
+func TestBasicSelectorNotPresent(t *testing.T) {
 	go func() {
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Fooo", "bar")
@@ -22,7 +22,8 @@ func TestTypeSelectorNotPresent(t *testing.T) {
 						<title>Page Title</title>
 					</head>
 					<body>
-						<div class="class">content</div>
+						<div class="classname">selector class content</div>
+						<div id="idname">selector id content</div>
 					</body>
 				</html>
 			`)
@@ -47,11 +48,11 @@ func TestTypeSelectorNotPresent(t *testing.T) {
 	}
 
 	if len(response.Selectors["foo"]) != 0 {
-		t.Fatalf("Response header 'foo' expected to have zero elements but got %v", response.Selectors["foo"])
+		t.Fatalf("Response selector 'foo' expected to have zero elements but got '%v'", response.Selectors["foo"])
 	}
 }
 
-func TestTypeSelectorPresent(t *testing.T) {
+func TestBasicSelectorPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -69,10 +70,10 @@ func TestTypeSelectorPresent(t *testing.T) {
 	}
 
 	if len(response.Selectors["title"]) != 1 {
-		t.Fatalf("Response header 'title' expected to have one element but got %v", response.Selectors["title"])
+		t.Fatalf("Response selector 'title' expected to have one element but got '%v'", response.Selectors["title"])
 	}
 
 	if response.Selectors["title"][0] != "Page Title" {
-		t.Fatalf("Response header 'title' expected to be 'Page Title' but got %v", response.Selectors["title"][0])
+		t.Fatalf("Response selector 'title' expected to be 'Page Title' but got '%v'", response.Selectors["title"][0])
 	}
 }
