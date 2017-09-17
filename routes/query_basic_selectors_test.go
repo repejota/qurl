@@ -22,8 +22,8 @@ func TestBasicSelectorNotPresent(t *testing.T) {
 						<title>Page Title</title>
 					</head>
 					<body>
-						<div class="class">selector class content</div>
-						<div id="id">selector id content</div>
+						<div class="classname">selector class content</div>
+						<div id="idname">selector id content</div>
 					</body>
 				</html>
 			`)
