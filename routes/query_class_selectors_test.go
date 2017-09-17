@@ -4,7 +4,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -50,8 +49,6 @@ func TestClassSelectorPresent(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unmarshaling response failed %v", err)
 	}
-
-	fmt.Println(response.Selectors)
 
 	if len(response.Selectors[".class"]) != 1 {
 		t.Fatalf("Response selector '.class' expected to have one element but got %v", len(response.Selectors[".class"]))

@@ -12,7 +12,7 @@ import (
 	"github.com/repejota/qurl"
 )
 
-func TestTypeSelectorNotPresent(t *testing.T) {
+func TestBasicSelectorNotPresent(t *testing.T) {
 	go func() {
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Fooo", "bar")
@@ -22,7 +22,8 @@ func TestTypeSelectorNotPresent(t *testing.T) {
 						<title>Page Title</title>
 					</head>
 					<body>
-						<div class="class">content</div>
+						<div class="class">selector class content</div>
+						<div id="id">selector id content</div>
 					</body>
 				</html>
 			`)
@@ -51,7 +52,7 @@ func TestTypeSelectorNotPresent(t *testing.T) {
 	}
 }
 
-func TestTypeSelectorPresent(t *testing.T) {
+func TestBasicSelectorPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)
