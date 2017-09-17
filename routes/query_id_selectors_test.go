@@ -34,7 +34,7 @@ func TestIDSelectorNotPresent(t *testing.T) {
 }
 
 func TestIDSelectorPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=#id", nil)
+	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=#idname", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -52,11 +52,11 @@ func TestIDSelectorPresent(t *testing.T) {
 
 	t.Log(response.Selectors)
 
-	if len(response.Selectors["#id"]) != 1 {
-		t.Fatalf("Response selector '#id' expected to have one element but got '%v'", response.Selectors["#id"])
+	if len(response.Selectors["#idname"]) != 1 {
+		t.Fatalf("Response selector '#idname' expected to have one element but got '%v'", response.Selectors["#idname"])
 	}
 
-	if response.Selectors["#id"][0] != "selector id content" {
-		t.Fatalf("Response selector '#id' expected to be 'selector id content' but got '%v'", response.Selectors["#id"][0])
+	if response.Selectors["#idname"][0] != "selector id content" {
+		t.Fatalf("Response selector '#idname' expected to be 'selector id content' but got '%v'", response.Selectors["#idname"][0])
 	}
 }
