@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/repejota/qurl"
 )
 
@@ -41,19 +42,15 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		result.Headers[v] = response.Header[v]
 	}
 
-	/*
-		// Process selectors
-		doc, err := goquery.NewDocumentFromReader(response.Body)
-		if err != nil {
-			result.Status = http.StatusInternalServerError
-			return c.JSON(result.Status, result)
-		}
-		for _, v := range queryParams["selector"] {
-			result.Selectors[v] = append(result.Selectors[v], doc.Find(v).Text())
-		}
-
-		return c.JSON(result.Status, result)
-	*/
+	// Process selectors
+	doc, err := goquery.NewDocumentFromReader(response.Body)
+	if err != nil {
+		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
+		return
+	}
+	for _, v := range queryParams["selector"] {
+		result.Selectors[v] = append(result.Selectors[v], doc.Find(v).Text())
+	}
 
 	resultJSON, err := json.Marshal(result)
 	if err != nil {

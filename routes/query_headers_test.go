@@ -12,13 +12,6 @@ import (
 )
 
 func TestHTTPHeaderNotPresent(t *testing.T) {
-	go func() {
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Fooo", "bar")
-		})
-		http.ListenAndServe(":6060", nil)
-	}()
-
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&header=foobar", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -35,8 +28,8 @@ func TestHTTPHeaderNotPresent(t *testing.T) {
 		t.Fatalf("Unmarshaling response failed %v", err)
 	}
 
-	if len(response.Headers["Foobar"]) != 0 {
-		t.Fatalf("Response header 'Foobar' expected to be an empty slice but got %v", response.Headers["Foobar"])
+	if len(response.Headers["InvalidHeader"]) != 0 {
+		t.Fatalf("Response header 'InvalidHeader' expected to be an empty slice but got %v", response.Headers["InvalidHeader"])
 	}
 }
 
