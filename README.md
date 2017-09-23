@@ -127,8 +127,8 @@ Example:
 ```
 $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Date' | json_pp
 {
-   "status" : 200,
    "url" : "https://github.com",
+   "status" : 200,
    "headers" : {
       "Date" : [
          "Sat, 23 Sep 2017 06:03:56 GMT"
