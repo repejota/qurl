@@ -86,6 +86,8 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Set-Cookie' | j
 
 It is possible also to query more than one response header at once. Just append as much `header` parameters with their names as you neeed to the query URL.
 
+Example:
+
 ```
 $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Cache-Control' | json_pp
 {
@@ -104,6 +106,8 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Cac
 ```
 
 If the header you query is not present in the response, we will still add it to the result and its value will be `null`.
+
+Example:
 
 ```
 $ curl -s 'http://localhost:8080/q?url=https://github.com&header=foobar' | json_pp
