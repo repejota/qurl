@@ -1,5 +1,6 @@
 html, body {
     font-family: 'Open Sans', sans-serif;
+    font-size: 1.1em;
 }
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Roboto', sans-serif;
@@ -13,6 +14,41 @@ header {
 
 main {
     padding: 15px 0;
+}
+main h2 {
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 10px;
+    margin-bottom: 10px; 
+}
+
+main .intro,
+main .userdocs-toc,
+main .devdocs-toc {
+    padding-bottom: 30px;
+}
+main .userdocs-toc ul,
+main .devdocs-toc ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+main blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+main blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+main blockquote p {
+    display: inline;
 }
 
 footer {

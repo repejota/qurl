@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>QURL Documentation</title>
-    <link>https://repejota.github.io/qurl/</link>
-    <description>Recent content on QURL Documentation</description>
+    <title>Userdocs on QURL Documentation</title>
+    <link>https://repejota.github.io/qurl/userdocs/</link>
+    <description>Recent content in Userdocs on QURL Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Mar 2017 12:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 24 Sep 2017 00:27:22 +0200</lastBuildDate>
     
-	<atom:link href="https://repejota.github.io/qurl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://repejota.github.io/qurl/userdocs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -29,24 +29,6 @@ $ curl -s http://qurl.io/q?url=https://example.com | json_pp { &amp;quot;url&amp
       <guid>https://repejota.github.io/qurl/userdocs/header-queries/</guid>
       <description>Get any HTTP headers defined in the response, just adding a header parameter with the name of the header you want to get as value to the URL query.
 $ curl -s &#39;http://localhost:8080/q?url=https://github.com&amp;amp;header=Content-Type&#39; | json_pp { &amp;quot;url&amp;quot; : &amp;quot;https://github.com&amp;quot;, &amp;quot;status&amp;quot; : 200, &amp;quot;headers&amp;quot; : { &amp;quot;Content-Type&amp;quot; : [ &amp;quot;text/html; charset=utf-8&amp;quot; ] } }   Notice that the resulting value is not an string but a list of strings. This is because a single header can have multiple values in the same response.</description>
-    </item>
-    
-    <item>
-      <title>Installation</title>
-      <link>https://repejota.github.io/qurl/devdocs/installation/</link>
-      <pubDate>Sun, 24 Sep 2017 00:28:50 +0200</pubDate>
-      
-      <guid>https://repejota.github.io/qurl/devdocs/installation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Building From Sources</title>
-      <link>https://repejota.github.io/qurl/devdocs/building-from-sources/</link>
-      <pubDate>Sun, 24 Sep 2017 00:37:48 +0200</pubDate>
-      
-      <guid>https://repejota.github.io/qurl/devdocs/building-from-sources/</guid>
-      <description></description>
     </item>
     
     <item>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Selector Queries</title>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/zenburn.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://repejota.github.io/qurl/css/styles.css">
+    <meta name="generator" content="Hugo 0.28-DEV" />
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Selector Queries</h1>
+    </div>
+</header>
+<main>
+    <div class="container">
+    
+
+<p>This is by far, the most powerful and useful feature of <em>Qurl</em>. You can use all the power of <em>CSS selectors</em> to retrieve any matching content of the target URL.</p>
+
+<p>Using <em>Qurl</em> query selectors you get an automated content scraping API tool of remote URL contents without needing any external dependencies neither any browser or aditional <em>HTML</em> parser/analyzer.</p>
+
+<p>Just calling <em>Qurl</em> simple API you will be able to do the same than with other more complex less powerful tools and also in less time and resources.</p>
+
+<h3 id="basic-selectors">Basic Selectors</h3>
+
+<h4 id="type-selectors">Type Selectors</h4>
+
+<p>Type selectors selects all elements that match the given HTML node name.</p>
+
+<p>For each matching node it will return its <em>text</em> and a list of pairs of <em>key</em> and <em>value</em> for all the <em>attibutes</em> the node has.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://example.com&amp;selector=title' | json_pp
+{
+   &quot;url&quot; : &quot;https://example.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;selectors&quot; : {
+      &quot;title&quot; : [
+         {
+            &quot;text&quot; : &quot;Example Domain&quot;,
+            &quot;attributes&quot; : null
+         }
+      ]
+   }
+}
+</code></pre>
+
+<p>As you can see for each <em>selector</em> it will return a list of matching elements, in the following example we are getting more than one element for a single selector.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://example.com&amp;selector=p' | json_pp
+{
+   &quot;url&quot; : &quot;https://example.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;selectors&quot; : {
+      &quot;p&quot; : [
+         {
+            &quot;text&quot; : &quot;This domain is established to be used for illustrative examples in documents. You may use this\n    domain in examples without prior coordination or asking for permission.&quot;,
+            &quot;attributes&quot; : null
+         },
+         {
+            &quot;text&quot; : &quot;More information...&quot;,
+            &quot;attributes&quot; : null
+         }
+      ]
+   }
+}
+</code></pre>
+
+<p>The <em>attributes</em> for each mathing element from a <em>selector</em> is also a list as they could be more than one. In the following exaple you can see an example:</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://example.com&amp;selector=meta' | json_pp
+{
+   &quot;url&quot; : &quot;https://example.com&quot;,
+   &quot;selectors&quot; : {
+      &quot;meta&quot; : [
+         {
+            &quot;text&quot; : &quot;&quot;,
+            &quot;attributes&quot; : [
+               {
+                  &quot;value&quot; : &quot;utf-8&quot;,
+                  &quot;key&quot; : &quot;charset&quot;
+               }
+            ]
+         },
+         {
+            &quot;text&quot; : &quot;&quot;,
+            &quot;attributes&quot; : [
+               {
+                  &quot;key&quot; : &quot;http-equiv&quot;,
+                  &quot;value&quot; : &quot;Content-type&quot;
+               },
+               {
+                  &quot;value&quot; : &quot;text/html; charset=utf-8&quot;,
+                  &quot;key&quot; : &quot;content&quot;
+               }
+            ]
+         },
+         {
+            &quot;attributes&quot; : [
+               {
+                  &quot;key&quot; : &quot;name&quot;,
+                  &quot;value&quot; : &quot;viewport&quot;
+               },
+               {
+                  &quot;value&quot; : &quot;width=device-width, initial-scale=1&quot;,
+                  &quot;key&quot; : &quot;content&quot;
+               }
+            ],
+            &quot;text&quot; : &quot;&quot;
+         }
+      ]
+   },
+   &quot;status&quot; : 200
+}
+</code></pre>
+
+<ul>
+<li>In the same way than the <em>Header Queries</em>, you can append more than one <em>selector</em> query parameter to your URL to query more than one selector with a single call to the API.</li>
+<li>And if there is no matching coincidence using a <em>selector</em> we won&rsquo;t add it to the response.</li>
+</ul>
+
+<h4 id="class-selectors">Class Selectors</h4>
+
+<h3 id="combinators">Combinators</h3>
+
+<p>combinators</p>
+
+<h3 id="pseudo-classes">Pseudo-classes</h3>
+
+<p>pseudo-classes</p>
+
+<h3 id="pseudo-elements">Pseudo-elements</h3>
+
+<p>pseudo-elements</p>
+
+<ul>
+<li>The Mozilla Developer Network website maintains accurated documentation about the standarized <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS Selectors</a> and how to use them to match content.</li>
+</ul>
+
+    </div>
+</main>
+<footer>
+    <div class="container">
+    CopyRight &copy; 2017 <a href="https://repejota.github.io/qurl/">QURL Documentation</a>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://repejota.github.io/qurl/js/app.js"></script>
+</body>
+</html>
