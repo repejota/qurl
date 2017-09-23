@@ -11,6 +11,8 @@
 	* [Header Queries](https://github.com/repejota/qurl#header-queries)
 	* [Selector Queries](https://github.com/repejota/qurl#selector-queries)
 		* [Basic Selectors](https://github.com/repejota/qurl#basic-selectors)
+			* [Type Selector](https://github.com/repejota/qurl#type-selector)
+			* [Class Selector](https://github.com/repejota/qurl#class-selector)
 		* [Combinators](https://github.com/repejota/qurl#combinators)
 		* [Pseudo-classes](https://github.com/repejota/qurl#pseudo-classes)
 		* [Pseudo-elements](https://github.com/repejota/qurl#pseudo-elements)
@@ -157,7 +159,11 @@ Just calling *Qurl* simple API you will be able to do the same than with other m
 
 #### Basic Selectors
 
-Selects all elements that match the given HTML node name.
+##### Type Selectors
+
+Type selectors selects all elements that match the given HTML node name.
+
+For each matching node it will return its *text* and a list of pairs of *key* and *value* for all the *attibutes* the node has.
 
 Example:
 
@@ -176,6 +182,9 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&selector=title' | jso
    }
 }
 ```
+
+As you can see for each *selector* it will return a list of matching elements, in the following example we are getting more than one element for a single selector.
+
 
 Example:
 
@@ -199,28 +208,62 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&selector=p' | json_pp
 }
 ```
 
+The *attributes* for each mathing element from a *selector* is also a list as they could be more than one. In the following exaple you can see an example  
+
 Example:
 
 ```
-$ curl -s 'http://localhost:8080/q?url=https://example.com&selector=a' | json_pp
+$ curl -s 'http://localhost:8080/q?url=https://example.com&selector=meta' | json_pp
 {
    "url" : "https://example.com",
-   "status" : 200,
    "selectors" : {
-      "a" : [
+      "meta" : [
+         {
+            "text" : "",
+            "attributes" : [
+               {
+                  "value" : "utf-8",
+                  "key" : "charset"
+               }
+            ]
+         },
+         {
+            "text" : "",
+            "attributes" : [
+               {
+                  "key" : "http-equiv",
+                  "value" : "Content-type"
+               },
+               {
+                  "value" : "text/html; charset=utf-8",
+                  "key" : "content"
+               }
+            ]
+         },
          {
             "attributes" : [
                {
-                  "key" : "href",
-                  "value" : "http://www.iana.org/domains/example"
+                  "key" : "name",
+                  "value" : "viewport"
+               },
+               {
+                  "value" : "width=device-width, initial-scale=1",
+                  "key" : "content"
                }
             ],
-            "text" : "More information..."
+            "text" : ""
          }
       ]
-   }
+   },
+   "status" : 200
 }
 ```
+
+> In the same way than the *Header Queries*, you can append more than one *selector* query parameter to your URL to query more than one selector with a single call to the API.
+
+> And if there is no matching coincidence using a *selector* we won't add it to the response.
+
+##### Class Selectors
 
 #### Combinators
 
