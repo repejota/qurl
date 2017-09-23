@@ -1,0 +1,12 @@
+name = "qurl"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Simple themne for the qurl project documentation."
+homepage = "https://github.com/repejota/qurl/"
+tags = ["documentation", "qurl", "thene", "hugo"]
+features = ["documentation"]
+min_version = 0.19
+
+[author]
+  name = "repejota"
+  homepage = "https://github.com/repejota"

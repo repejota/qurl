@@ -58,8 +58,12 @@ dev-deps:
 # Documentation
 
 .PHONY: docs
-docs:
+docs: docs-clean
 	 cd docs-src && hugo
+
+.PHONY: docs-clean
+docs-clean:
+	 rm -rf docs/* 
 
 .PHONY: docs-serve
 docs-serve:
