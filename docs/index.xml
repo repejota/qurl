@@ -11,5 +11,35 @@
 	<atom:link href="https://repejota.github.io/qurl/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>About QURL</title>
+      <link>https://repejota.github.io/qurl/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://repejota.github.io/qurl/about/</guid>
+      <description>About QURL Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</description>
+    </item>
+    
+    <item>
+      <title>QURL Developer Documentation</title>
+      <link>https://repejota.github.io/qurl/devdocs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://repejota.github.io/qurl/devdocs/</guid>
+      <description>Introduction Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</description>
+    </item>
+    
+    <item>
+      <title>QURL User Documentation</title>
+      <link>https://repejota.github.io/qurl/userdocs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://repejota.github.io/qurl/userdocs/</guid>
+      <description>Introduction Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+Basic Usage The most simple query only returns the HTTP Status code response when fetching url contents.
+Example:
+$ curl -s http://qurl.io/q?url=https://example.com | json_pp { &amp;quot;url&amp;quot; : &amp;quot;https://www.</description>
+    </item>
+    
   </channel>
 </rss>
