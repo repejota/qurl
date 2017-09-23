@@ -11,7 +11,7 @@ import (
 	"github.com/repejota/qurl"
 )
 
-func TestBasicSelectorNotPresent(t *testing.T) {
+func TestBasicSelectorTypeNotPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func TestBasicSelectorNotPresent(t *testing.T) {
 	}
 }
 
-func TestBasicSelectorPresent(t *testing.T) {
+func TestBasicSelectorTypePresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)

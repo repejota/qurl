@@ -67,7 +67,7 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Content-Type' |
 }
 ```
 
-Notice that the resulting value is not an string but a list of strings. This is because a single header can have multiple values in the same response. 
+> Notice that the resulting value is not an string but a list of strings. This is because a single header can have multiple values in the same response. 
 
 In this case we will also return a list of values for the response header so you'll be able to iterate over them.
 
@@ -157,7 +157,37 @@ Just calling *Qurl* simple API you will be able to do the same than with other m
 
 #### Basic Selectors
 
-basic selectors
+Selects all elements that match the given HTML node name.
+
+Example:
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://example.com&selector=title' | json_pp
+{
+   "url" : "https://example.com",
+   "status" : 200,
+   "selectors" : {
+      "title" : [
+         "Example Domain"
+      ]
+   }
+}
+```
+
+Example:
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://example.com&selector=p' | json_pp
+{
+   "url" : "https://example.com",
+   "status" : 200,
+   "selectors" : {
+      "title" : [
+         "Example Domain"
+      ]
+   }
+}
+```
 
 #### Combinators
 
