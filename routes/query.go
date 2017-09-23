@@ -33,7 +33,13 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
 	}
-	defer response.Body.Close()
+	defer func() {
+		err := response.Body.Close()
+		if err != nil {
+			http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
+			return
+		}
+	}()
 
 	queryParams := r.URL.Query()
 
