@@ -54,3 +54,12 @@ deps:
 dev-deps:
 	go get -u github.com/alecthomas/gometalinter
 	gometalinter --install
+
+# Documentation
+
+.PHONY: docs
+docs:
+	 cd docs-src && hugo server -D
+
+docs-build:
+	cd docs-src && hugo 

@@ -1,0 +1,46 @@
+languageCode = "en-us"
+title = "QURL"
+author = "Raül Pérez <repejota@gmail.com>"
+canonifyurls = true
+paginate = 5
+baseURL = "http://repejota.github.io/qurl"
+theme = "strange-case"
+googleAnalytics = "UA-123-456"
+publishDir = "../docs"
+
+[params]
+    colorScheme = "scheme-lightbrown"
+    DateFormat = "2 Jan 2006"
+    description = "Documentation."
+    sidebarFreeText = "A drop-in and easy to deploy microservice who exposes an HTTP API you can use to extract content from any web page as JSON."
+    copyright = "Raül Pérez <repejota@gmail.com>"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = -100
+
+[[menu.main]]
+    name = "API Reference"
+    url = "https://godoc.org/github.com/repejota/qurl"
+    weight = -90
+
+[[menu.main]]
+    name = "Github"
+    url = "https://github.com/repejota/qurl/"
+    weight = -80
+
+[[menu.main]]
+    name = "Issues"
+    url = "https://github.com/repejota/qurl/issues"
+    weight = -70
+
+[[menu.main]]
+    name = "Releases"
+    url = "https://github.com/repejota/qurl/releases"
+    weight = -60
+
+[[menu.main]]
+    name = "About"
+    url = "https://github.com/repejota/qurl#qurl"
+    weight = -50
