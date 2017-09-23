@@ -168,7 +168,10 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&selector=title' | jso
    "status" : 200,
    "selectors" : {
       "title" : [
-         "Example Domain"
+         {
+            "text" : "Example Domain",
+            "attributes" : null
+         }
       ]
    }
 }
@@ -182,8 +185,38 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&selector=p' | json_pp
    "url" : "https://example.com",
    "status" : 200,
    "selectors" : {
-      "title" : [
-         "Example Domain"
+      "p" : [
+         {
+            "text" : "This domain is established to be used for illustrative examples in documents. You may use this\n    domain in examples without prior coordination or asking for permission.",
+            "attributes" : null
+         },
+         {
+            "text" : "More information...",
+            "attributes" : null
+         }
+      ]
+   }
+}
+```
+
+Example:
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://example.com&selector=a' | json_pp
+{
+   "url" : "https://example.com",
+   "status" : 200,
+   "selectors" : {
+      "a" : [
+         {
+            "attributes" : [
+               {
+                  "key" : "href",
+                  "value" : "http://www.iana.org/domains/example"
+               }
+            ],
+            "text" : "More information..."
+         }
       ]
    }
 }

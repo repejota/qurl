@@ -54,7 +54,7 @@ func TestBasicSelectorTypePresent(t *testing.T) {
 		t.Fatalf("Response selector 'title' expected to have one element but got '%v'", response.Selectors["title"])
 	}
 
-	if response.Selectors["title"][0] != "Page Title" {
+	if response.Selectors["title"][0].Text != "Page Title" {
 		t.Fatalf("Response selector 'title' expected to be 'Page Title' but got '%v'", response.Selectors["title"][0])
 	}
 }
