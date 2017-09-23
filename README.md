@@ -10,6 +10,10 @@
 	* [Basic Usage](https://github.com/repejota/qurl#basic-usage)
 	* [Header Queries](https://github.com/repejota/qurl#header-queries)
 	* [Selector Queries](https://github.com/repejota/qurl#selector-queries)
+		* [Basic Selectors](https://github.com/repejota/qurl#basic-selectors)
+		* [Combinators](https://github.com/repejota/qurl#combinators)
+		* [Pseudo-classes](https://github.com/repejota/qurl#pseudo-classes)
+		* [Pseudo-elements](https://github.com/repejota/qurl#pseudo-elements)
 * [Developer Documentation](https://github.com/repejota/qurl#developer-documentation)
 * [Continuous Integration](https://github.com/repejota/qurl#continuous-integration)
   * [Tests](https://github.com/repejota/qurl#license)
@@ -145,7 +149,29 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Dat
 
 ### Selector Queries
 
-selector queries
+This is by far, the most powerful and useful feature of *Qurl*. You can use all the power of *CSS selectors* to retrieve any matching content of the target URL. 
+
+Using *Qurl* query selectors you get an automated content scraping API tool of remote URL contents without needing any external dependencies neither any browser or aditional *HTML* parser/analyzer.
+
+Just calling *Qurl* simple API you will be able to do the same than with other more complex less powerful tools and also in less time and resources.
+
+#### Basic Selectors
+
+basic selectors
+
+#### Combinators
+
+combinators
+
+#### Pseudo-classes
+
+pseudo-classes
+
+#### Pseudo-elements
+
+pseudo-elements
+
+> The Mozilla Developer Network website maintains accurated documentation about the standarized [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) and how to use them to match content.
 
 ## Developer Documentation
 
