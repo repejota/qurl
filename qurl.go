@@ -44,7 +44,7 @@ func (q *QURL) Query(queryParams url.Values) (*Response, error) {
 		q.Response.Status = http.StatusInternalServerError
 		return q.Response, err
 	}
-	defer r.Body.Close()
+	defer func() { _ = r.Body.Close() }()
 
 	err = q.processHeaders(queryParams, r)
 	if err != nil {
