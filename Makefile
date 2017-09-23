@@ -44,7 +44,7 @@ cover-html:
 # Lint
 
 lint:
-	gometalinter --tests $(PACKAGES)
+	gometalinter --tests .
 
 # Dependencies
 
