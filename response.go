@@ -2,12 +2,10 @@
 
 package qurl
 
-// Response is the type that defines a query result.
-type Response struct {
-	URL       string                `json:"url"`
-	Status    int                   `json:"status"`
-	Headers   map[string][]string   `json:"headers,omitempty"`
-	Selectors map[string][]*Element `json:"selectors,omitempty"`
+// Attribute ...
+type Attribute struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
 }
 
 // Element represents an HTML element from a selector coincidence.
@@ -16,10 +14,12 @@ type Element struct {
 	Attributes []*Attribute `json:"attributes"`
 }
 
-// Attribute ...
-type Attribute struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
+// Response is the type that defines a query result.
+type Response struct {
+	URL       string                `json:"url"`
+	Status    int                   `json:"status"`
+	Headers   map[string][]string   `json:"headers,omitempty"`
+	Selectors map[string][]*Element `json:"selectors,omitempty"`
 }
 
 // NewResponse returns a response instance.
