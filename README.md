@@ -26,11 +26,91 @@ User documentation
 
 ### Basic Usage
 
-basic usage
+The most simple query only returns the HTTP Status code response when fetching url contents.
+
+Example:
+
+```
+$ curl -s http://qurl.io/q?url=https://example.com | json_pp 
+{
+   "status" : 200,
+   "url" : "https://www.example.com"
+}
+```
+
+> We use `-s` curl flag to enable silent or quiet mode. So curl won't show progress meter or error messages. It will still output the resulting data.
+
+> Also the result is piped to `json_pp` command to pretty print the JSON data.
+
+> See man pages [curl(1)](http://www.manpagez.com/man/1/curl/) and [json_pp(1)](http://www.manpagez.com/man/1/json_pp/) for more information.
 
 ### Header Queries
 
 header queries
+
+Example:
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://github.com&header=Content-Type' | json_pp
+{
+   "url" : "https://github.com",
+   "status" : 200,
+   "headers" : {
+      "Content-Type" : [
+         "text/html; charset=utf-8"
+      ]
+   }
+}
+```
+
+with multiple values
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://github.com&header=Set-Cookie' | json_pp
+{
+   "url" : "https://github.com",
+   "status" : 200,
+   "headers" : {
+      "Set-Cookie" : [
+         "_octo=GH1.1.1872640429.1506145235; domain=.github.com; path=/; expires=Mon, 23 Sep 2019 05:40:35 -0000",
+         "logged_in=no; domain=.github.com; path=/; expires=Wed, 23 Sep 2037 05:40:35 -0000; secure; HttpOnly",
+         "_gh_sess=eyJzZXNzaW9uX2lkIjoiNGU3ZmEwMGUzN2RkOTFkYmYyYjFhM2RmODA3YTc4M2QiLCJsYXN0X3JlYWRfZnJvbV9yZXBsaWNhcyI6MTUwNjE0NTIzNTY2NywiX2NzcmZfdG9rZW4iOiJWMXFCYUlsT1h3YXZTYTErVWJyNCsvRnFFcE5zNVdxUGczUzVKSlo1bTZnPSJ9--8dd729a38c9647489eb95438071a0a5bf083edb6; path=/; secure; HttpOnly"
+      ]
+   }
+}
+```
+
+more than one header on the same query
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Cache-Control' | json_pp
+{
+   "url" : "https://github.com",
+   "status" : 200,
+   "headers" : {
+      "Cache-Control" : [
+         "no-cache"
+      ],
+      "Date" : [
+         "Sat, 23 Sep 2017 05:47:30 GMT"
+      ]
+   }
+}
+ 
+```
+
+if the header is not found in the response it is also added to the result but with null value
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://github.com&header=foobar' | json_pp
+{
+   "url" : "https://github.com",
+   "status" : 200,
+   "headers" : {
+      "foobar" : null
+   }
+}
+```
 
 ### Selector Queries
 
