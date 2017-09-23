@@ -4,7 +4,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -13,24 +12,6 @@ import (
 )
 
 func TestBasicSelectorNotPresent(t *testing.T) {
-	go func() {
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Fooo", "bar")
-			fmt.Fprintf(w, `
-				<html>
-					<head>
-						<title>Page Title</title>
-					</head>
-					<body>
-						<div class="classname">selector class content</div>
-						<div id="idname">selector id content</div>
-					</body>
-				</html>
-			`)
-		})
-		http.ListenAndServe(":6060", nil)
-	}()
-
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)

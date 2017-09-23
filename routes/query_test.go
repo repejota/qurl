@@ -2,10 +2,34 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	go func() {
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Fooo", "bar")
+			fmt.Fprintf(w, `
+				<html>
+					<head>
+						<title>Page Title</title>
+					</head>
+					<body>
+						<div class="classname">selector class content</div>
+						<div id="idname">selector id content</div>
+					</body>
+				</html>
+			`)
+		})
+		http.ListenAndServe(":6060", nil)
+	}()
+	exitVal := m.Run()
+	os.Exit(exitVal)
+}
 
 func TestQuery(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060", nil)
