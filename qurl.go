@@ -3,29 +3,31 @@
 package qurl
 
 import (
+	"bytes"
+	"io"
 	"net/http"
 	"net/url"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-// QURL ...
+// QURL is the main ingterface for the microservice.
 type QURL struct {
 	URL      string
 	Request  *Request
 	Response *Response
 }
 
-// NewQURL ...
+// NewQURL creates an instance of QURL.
 func NewQURL() *QURL {
-	qurl := &QURL{
+	qurl := QURL{
 		Request:  NewRequest(),
 		Response: NewResponse(),
 	}
-	return qurl
+	return &qurl
 }
 
-// SetURL ...
+// SetURL validates and sets the target URL to be queried.
 func (q *QURL) SetURL(u string) error {
 	_, err := url.ParseRequestURI(u)
 	if err != nil {
@@ -36,44 +38,43 @@ func (q *QURL) SetURL(u string) error {
 	return nil
 }
 
-// Query ...
+// Query queries the URL and process all the data we ne3e
 func (q *QURL) Query(queryParams url.Values) (*Response, error) {
 	// Fetch URL content
-	r, err := q.Request.Fetch(q.URL)
+	statuscode, headers, body, err := q.Request.Fetch(q.URL)
 	if err != nil {
-		q.Response.Status = http.StatusInternalServerError
-		return q.Response, err
-	}
-	defer func() { _ = r.Body.Close() }()
-
-	err = q.processHeaders(queryParams, r)
-	if err != nil {
-		q.Response.Status = http.StatusInternalServerError
+		q.Response.Status = statuscode
 		return q.Response, err
 	}
 
-	err = q.processSelectors(queryParams, r)
+	err = q.processHeaders(queryParams, *headers)
 	if err != nil {
-		q.Response.Status = http.StatusInternalServerError
+		q.Response.Status = statuscode
 		return q.Response, err
 	}
 
-	q.Response.Status = r.StatusCode
+	err = q.processSelectors(queryParams, bytes.NewReader(body))
+	if err != nil {
+		q.Response.Status = statuscode
+		return q.Response, err
+	}
+
+	q.Response.Status = statuscode
 	return q.Response, nil
 }
 
 // processHeaders ...
-func (q *QURL) processHeaders(queryParams url.Values, response *http.Response) error {
+func (q *QURL) processHeaders(queryParams url.Values, headers http.Header) error {
 	for _, v := range queryParams["header"] {
-		q.Response.Headers[v] = response.Header[v]
+		q.Response.Headers[v] = headers[v]
 	}
 	return nil
 }
 
 // processSelectors ...
-func (q *QURL) processSelectors(queryParams url.Values, response *http.Response) error {
+func (q *QURL) processSelectors(queryParams url.Values, body io.Reader) error {
 	// Build a DOM from response content
-	doc, err := goquery.NewDocumentFromReader(response.Body)
+	doc, err := goquery.NewDocumentFromReader(body)
 	if err != nil {
 		return err
 	}

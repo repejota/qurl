@@ -24,8 +24,9 @@ type Response struct {
 
 // NewResponse returns a response instance.
 func NewResponse() *Response {
-	r := &Response{}
-	r.Headers = make(map[string][]string)
-	r.Selectors = make(map[string][]*Element)
-	return r
+	r := Response{
+		Headers:   make(map[string][]string),
+		Selectors: make(map[string][]*Element),
+	}
+	return &r
 }
