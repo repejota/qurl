@@ -38,7 +38,7 @@ func (q *QURL) SetURL(u string) error {
 	return nil
 }
 
-// Query queries the URL and process all the data we ne3e
+// Query queries the URL and process all the data we want to fetch.
 func (q *QURL) Query(queryParams url.Values) (*Response, error) {
 	// Fetch URL content
 	statuscode, headers, body, err := q.Request.Fetch(q.URL)
