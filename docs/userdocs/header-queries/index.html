@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Header Queries</title>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/zenburn.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://repejota.github.io/qurl/css/styles.css">
+    <meta name="generator" content="Hugo 0.28-DEV" />
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Header Queries</h1>
+    </div>
+</header>
+<main>
+    <div class="container">
+    <p>Get any HTTP headers defined in the response, just adding a <code>header</code> parameter with the name of the header you want to get as value to the URL query.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Content-Type' | json_pp
+{
+   &quot;url&quot; : &quot;https://github.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;headers&quot; : {
+      &quot;Content-Type&quot; : [
+         &quot;text/html; charset=utf-8&quot;
+      ]
+   }
+}
+</code></pre>
+
+<ul>
+<li>Notice that the resulting value is not an string but a list of strings. This is because a single header can have multiple values in the same response.</li>
+</ul>
+
+<p>In this case we will also return a list of values for the response header so you&rsquo;ll be able to iterate over them.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Set-Cookie' | json_pp
+{
+   &quot;url&quot; : &quot;https://github.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;headers&quot; : {
+      &quot;Set-Cookie&quot; : [
+         &quot;_octo=GH1.1.1872640429.1506145235; domain=.github.com; path=/; expires=Mon, 23 Sep 2019 05:40:35 -0000&quot;,
+         &quot;logged_in=no; domain=.github.com; path=/; expires=Wed, 23 Sep 2037 05:40:35 -0000; secure; HttpOnly&quot;,
+         &quot;_gh_sess=eyJzZXNzaW9uX2lkIjoiNGU3ZmEwMGUzN2RkOTFkYmYyYjFhM2RmODA3YTc4M2QiLCJsYXN0X3JlYWRfZnJvbV9yZXBsaWNhcyI6MTUwNjE0NTIzNTY2NywiX2NzcmZfdG9rZW4iOiJWMXFCYUlsT1h3YXZTYTErVWJyNCsvRnFFcE5zNVdxUGczUzVKSlo1bTZnPSJ9--8dd729a38c9647489eb95438071a0a5bf083edb6; path=/; secure; HttpOnly&quot;
+      ]
+   }
+}
+</code></pre>
+
+<p>It is possible also to query more than one response header at once. Just append as much <code>header</code> parameters with their names as you neeed to the query URL.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Date&amp;header=Cache-Control' | json_pp
+{
+   &quot;url&quot; : &quot;https://github.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;headers&quot; : {
+      &quot;Cache-Control&quot; : [
+         &quot;no-cache&quot;
+      ],
+      &quot;Date&quot; : [
+         &quot;Sat, 23 Sep 2017 05:47:30 GMT&quot;
+      ]
+   }
+}
+ 
+</code></pre>
+
+<p>If the header you query is not present in the response, we will still add it to the result and its value will be <code>null</code>.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=foobar' | json_pp
+{
+   &quot;url&quot; : &quot;https://github.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;headers&quot; : {
+      &quot;foobar&quot; : null
+   }
+}
+</code></pre>
+
+<p>Finally if you query for an specific header more than once, the result will be only populated once so bandwitch will be saved and the response data will be simpler.</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Date&amp;header=Date' | json_pp
+{
+   &quot;url&quot; : &quot;https://github.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;headers&quot; : {
+      &quot;Date&quot; : [
+         &quot;Sat, 23 Sep 2017 06:03:56 GMT&quot;
+      ]
+   }
+}
+</code></pre>
+
+<ul>
+<li>Mozila Developer Network website offers good and accurated documentation about what <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP Headers</a> are their use. Their documentation is also available in multiple languages.</li>
+<li>For an updated list of standarizeed HTTP Headers, you can check the <a href="https://tools.ietf.org/html/rfc4229">RFC4229</a> and the <a href="https://www.iana.org/assignments/message-headers/message-headers.xhtml">IANA Message Headers</a> document.</li>
+<li>Wikipedia also maintains a list of standard and non-standard <a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields">Response HTTP Headers</a> in case you want more information.</li>
+</ul>
+
+    </div>
+</main>
+<footer>
+    <div class="container">
+    CopyRight &copy; 2017 <a href="https://repejota.github.io/qurl/">QURL Documentation</a>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://repejota.github.io/qurl/js/app.js"></script>
+</body>
+</html>

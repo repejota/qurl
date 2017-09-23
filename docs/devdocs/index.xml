@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devdocs on QURL Documentation</title>
+    <link>https://repejota.github.io/qurl/devdocs/</link>
+    <description>Recent content in Devdocs on QURL Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Sep 2017 00:28:50 +0200</lastBuildDate>
+    
+	<atom:link href="https://repejota.github.io/qurl/devdocs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installation</title>
+      <link>https://repejota.github.io/qurl/devdocs/installation/</link>
+      <pubDate>Sun, 24 Sep 2017 00:28:50 +0200</pubDate>
+      
+      <guid>https://repejota.github.io/qurl/devdocs/installation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Building From Sources</title>
+      <link>https://repejota.github.io/qurl/devdocs/building-from-sources/</link>
+      <pubDate>Sun, 24 Sep 2017 00:37:48 +0200</pubDate>
+      
+      <guid>https://repejota.github.io/qurl/devdocs/building-from-sources/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
