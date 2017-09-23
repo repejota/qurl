@@ -33,8 +33,8 @@ Example:
 ```
 $ curl -s http://qurl.io/q?url=https://example.com | json_pp 
 {
-   "status" : 200,
-   "url" : "https://www.example.com"
+   "url" : "https://www.example.com",
+   "status" : 200
 }
 ```
 
