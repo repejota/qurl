@@ -9,30 +9,34 @@ import (
 	"github.com/repejota/qurl"
 )
 
-// Query fetch an URL and returns JSON with the data obtained.
+// Query route fetch an URL and queries the response to get data.
 func Query(w http.ResponseWriter, r *http.Request) {
 	queryParams := r.URL.Query()
 
 	qurl := qurl.NewQURL()
 
+	// Sets and validates target URL.
 	err := qurl.SetURL(queryParams.Get("url"))
 	if err != nil {
 		http.Error(w, "INVALID_URL", http.StatusBadRequest)
 		return
 	}
 
+	// Query the target URL and obtain data.
 	response, err := qurl.Query(queryParams)
 	if err != nil {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
 	}
 
+	// Builds the response with the obtained data.
 	responseJSON, err := json.Marshal(response)
 	if err != nil {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
 	}
 
+	// Returns the response as JSON.
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(responseJSON)
