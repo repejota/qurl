@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>QURL Documentation</title>
+    <link>https://repejota.github.io/qurl/</link>
+    <description>Recent content on QURL Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Mar 2017 12:00:00 -0500</lastBuildDate>
+    
+	<atom:link href="https://repejota.github.io/qurl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

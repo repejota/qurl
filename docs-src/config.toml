@@ -1,0 +1,5 @@
+baseURL = "https://repejota.github.io/qurl/"
+languageCode = "en-us"
+title = "QURL Documentation"
+theme = "qurl"
+publishDir = "../docs"

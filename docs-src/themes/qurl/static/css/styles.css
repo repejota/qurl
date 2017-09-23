@@ -1,0 +1,22 @@
+html, body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+header {
+    background-color: #ecf0f1;
+    padding: 15px 0;
+}
+
+main {
+    padding: 15px 0;
+}
+
+footer {
+    background-color: #ecf0f1;
+    padding: 15px 0;
+    font-size: 0.8em;
+}
