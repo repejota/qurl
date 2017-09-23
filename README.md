@@ -46,7 +46,7 @@ $ curl -s http://qurl.io/q?url=https://example.com | json_pp
 
 ### Header Queries
 
-header queries
+Get any HTTP headers defined in the response, just adding a `header` parameter with the name of the header you want to get as value to the URL query.
 
 Example:
 
@@ -63,7 +63,11 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Content-Type' |
 }
 ```
 
-with multiple values
+Notice that the resulting value is not an string but a list of strings. This is because a single header can have multiple values in the same response. 
+
+In this case we will also return a list of values for the response header so you'll be able to iterate over them.
+
+Example:
 
 ```
 $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Set-Cookie' | json_pp
@@ -80,7 +84,7 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Set-Cookie' | j
 }
 ```
 
-more than one header on the same query
+It is possible also to query more than one response header at once. Just append as much `header` parameters with their names as you neeed to the query URL.
 
 ```
 $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Cache-Control' | json_pp
@@ -99,7 +103,7 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Cac
  
 ```
 
-if the header is not found in the response it is also added to the result but with null value
+If the header you query is not present in the response, we will still add it to the result and its value will be `null`.
 
 ```
 $ curl -s 'http://localhost:8080/q?url=https://github.com&header=foobar' | json_pp
@@ -108,6 +112,23 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=foobar' | json_
    "status" : 200,
    "headers" : {
       "foobar" : null
+   }
+}
+```
+
+Finally if you query for an specific header more than once, the result will be only populated once so bandwitch will be saved and the response data will be simpler.
+
+Example:
+
+```
+$ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Date' | json_pp
+{
+   "status" : 200,
+   "url" : "https://github.com",
+   "headers" : {
+      "Date" : [
+         "Sat, 23 Sep 2017 06:03:56 GMT"
+      ]
    }
 }
 ```
