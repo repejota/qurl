@@ -1,6 +1,5 @@
 // Copyright 2017 The qurl Authors. All rights reserved.
 
-// Package routes implements all the HTTP entry points for this microservice.
 package routes
 
 import (
@@ -15,6 +14,7 @@ func Query(w http.ResponseWriter, r *http.Request) {
 	queryParams := r.URL.Query()
 
 	qurl := qurl.NewQURL()
+
 	err := qurl.SetURL(queryParams.Get("url"))
 	if err != nil {
 		http.Error(w, "INVALID_URL", http.StatusBadRequest)
