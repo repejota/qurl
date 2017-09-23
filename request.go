@@ -17,8 +17,5 @@ func NewRequest() *Request {
 // Fetch ...
 func (r *Request) Fetch(url string) (*http.Response, error) {
 	resp, err := http.Get(url)
-	if err != nil {
-		return resp, err
-	}
-	return resp, nil
+	return resp, err
 }
