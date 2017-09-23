@@ -42,5 +42,5 @@ publishDir = "../docs"
 
 [[menu.main]]
     name = "About"
-    url = "https://github.com/repejota/qurl#qurl"
+    url = "/about/"
     weight = -50
