@@ -54,7 +54,7 @@ func TestIDSelectorPresent(t *testing.T) {
 		t.Fatalf("Response selector '#idname' expected to have one element but got '%v'", response.Selectors["#idname"])
 	}
 
-	if response.Selectors["#idname"][0] != "selector id content" {
+	if response.Selectors["#idname"][0].Text != "selector id content" {
 		t.Fatalf("Response selector '#idname' expected to be 'selector id content' but got '%v'", response.Selectors["#idname"][0])
 	}
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/repejota/qurl"
 )
 
-func TestBasicSelectorNotPresent(t *testing.T) {
+func TestBasicSelectorTypeNotPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func TestBasicSelectorNotPresent(t *testing.T) {
 	}
 }
 
-func TestBasicSelectorPresent(t *testing.T) {
+func TestBasicSelectorTypePresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=title", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -54,7 +54,7 @@ func TestBasicSelectorPresent(t *testing.T) {
 		t.Fatalf("Response selector 'title' expected to have one element but got '%v'", response.Selectors["title"])
 	}
 
-	if response.Selectors["title"][0] != "Page Title" {
+	if response.Selectors["title"][0].Text != "Page Title" {
 		t.Fatalf("Response selector 'title' expected to be 'Page Title' but got '%v'", response.Selectors["title"][0])
 	}
 }

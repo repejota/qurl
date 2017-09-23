@@ -14,7 +14,9 @@ import (
 
 // Query fetch an URL and returns JSON with the data obtained.
 func Query(w http.ResponseWriter, r *http.Request) {
-	u := r.URL.Query().Get("url")
+	queryParams := r.URL.Query()
+
+	u := queryParams.Get("url")
 
 	result := qurl.NewResponse()
 	result.URL = u
@@ -41,24 +43,16 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	queryParams := r.URL.Query()
-
-	// Process headers
-	for _, v := range queryParams["header"] {
-		result.Headers[v] = response.Header[v]
-	}
-
-	// Process selectors
-	doc, err := goquery.NewDocumentFromReader(response.Body)
+	err = processHeaders(queryParams, response, result)
 	if err != nil {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
 	}
-	for _, v := range queryParams["selector"] {
-		selection := doc.Find(v)
-		if selection.Size() > 0 {
-			result.Selectors[v] = append(result.Selectors[v], selection.Text())
-		}
+
+	err = processSelectors(queryParams, response, result)
+	if err != nil {
+		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
+		return
 	}
 
 	resultJSON, err := json.Marshal(result)
@@ -70,4 +64,47 @@ func Query(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(resultJSON)
+}
+
+// processHeaders ...
+func processHeaders(queryParams url.Values, response *http.Response, result *qurl.Response) error {
+	for _, v := range queryParams["header"] {
+		result.Headers[v] = response.Header[v]
+	}
+	return nil
+}
+
+// processSelectors ...
+func processSelectors(queryParams url.Values, response *http.Response, result *qurl.Response) error {
+	// Build a DOM from response content
+	doc, err := goquery.NewDocumentFromReader(response.Body)
+	if err != nil {
+		return err
+	}
+
+	// Query the DOM with all selectors
+	for _, v := range queryParams["selector"] {
+
+		// Process matching nodes
+		doc.Find(v).Each(func(index int, selection *goquery.Selection) {
+
+			// Node text
+			element := &qurl.Element{
+				Text: selection.Text(),
+			}
+
+			// Node attributes
+			for _, v := range selection.Nodes[0].Attr {
+				attr := &qurl.Attribute{
+					Key:   v.Key,
+					Value: v.Val,
+				}
+				element.Attributes = append(element.Attributes, attr)
+			}
+
+			result.Selectors[v] = append(result.Selectors[v], element)
+		})
+	}
+
+	return nil
 }
