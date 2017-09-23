@@ -3,16 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://repejota.github.io/qurl/categories/</loc>
+    <loc>https://repejota.github.io/qurl/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://repejota.github.io/qurl/</loc>
+    <loc>https://repejota.github.io/qurl/</loc>
   </url>
   
   <url>
-    <loc>http://repejota.github.io/qurl/tags/</loc>
+    <loc>https://repejota.github.io/qurl/tags/</loc>
     <priority>0</priority>
   </url>
   

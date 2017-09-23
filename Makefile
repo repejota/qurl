@@ -59,7 +59,8 @@ dev-deps:
 
 .PHONY: docs
 docs:
-	 cd docs-src && hugo server -D
+	 cd docs-src && hugo
 
-docs-build:
-	cd docs-src && hugo 
+.PHONY: docs-serve
+docs-serve:
+	cd docs-src && hugo server -D 
