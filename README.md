@@ -137,6 +137,12 @@ $ curl -s 'http://localhost:8080/q?url=https://github.com&header=Date&header=Dat
 }
 ```
 
+> Mozila Developer Network website offers good and accurated documentation about what [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) are their use. Their documentation is also available in multiple languages.
+
+> For an updated list of standarizeed HTTP Headers, you can check the [RFC4229](https://tools.ietf.org/html/rfc4229) and the [IANA Message Headers](https://www.iana.org/assignments/message-headers/message-headers.xhtml) document. 
+
+> Wikipedia also maintains a list of standard and non-standard [Response HTTP Headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields) in case you want more information.
+
 ### Selector Queries
 
 selector queries
