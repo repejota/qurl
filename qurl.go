@@ -68,12 +68,12 @@ func (q *QURL) processSelectors(params url.Values, resp *http.Response, response
 		// Process matching nodes
 		doc.Find(v).Each(func(index int, selection *goquery.Selection) {
 			// Node text
-			element := &Element{
+			element := &element{
 				Text: selection.Text(),
 			}
 			// Node attributes
 			for _, v := range selection.Nodes[0].Attr {
-				attr := &Attribute{
+				attr := &attribute{
 					Key:   v.Key,
 					Value: v.Val,
 				}
