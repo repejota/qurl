@@ -52,10 +52,7 @@ func TestFetch(t *testing.T) {
 
 func TestFetchFail(t *testing.T) {
 	request := NewRequest()
-	status, _, _, err := request.Fetch("http://invalidhost")
-	if err.Error() != "Get http://invalidhost: dial tcp: lookup invalidhost: no such host" {
-		t.Fatal(err)
-	}
+	status, _, _, _ := request.Fetch("http://invalidhost")
 	if status != 500 {
 		t.Fatalf("Fetch url expected to return code '500' but got %d", status)
 	}
