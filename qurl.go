@@ -3,8 +3,6 @@
 package qurl
 
 import (
-	"bytes"
-	"io"
 	"net/http"
 	"net/url"
 
@@ -13,76 +11,66 @@ import (
 
 // QURL is the main ingterface for the microservice.
 type QURL struct {
-	URL      string
-	Request  *Request
-	Response *Response
+	URL string
 }
 
 // NewQURL creates an instance of QURL.
 func NewQURL() *QURL {
-	qurl := QURL{
-		Request:  NewRequest(),
-		Response: NewResponse(),
-	}
+	qurl := QURL{}
 	return &qurl
 }
 
 // Query queries the URL and process all the data we want to fetch.
-func (q *QURL) Query(queryParams url.Values) error {
-	q.URL = queryParams.Get("url")
-	q.Request.URL = q.URL
-	q.Response.URL = q.URL
+func (q *QURL) Query(params url.Values) (*Response, error) {
+	q.URL = params.Get("url")
+
+	response := NewResponse()
+	response.URL = q.URL
 
 	// Fetch URL content
-	statuscode, headers, body, err := q.Request.Fetch()
+	request := NewRequest()
+	resp, err := request.Fetch(q.URL)
 	if err != nil {
-		q.Response.Status = statuscode
-		return err
+		return response, err
+	}
+	response.Status = resp.StatusCode
+
+	err = q.processHeaders(params, resp.Header, response)
+	if err != nil {
+		return nil, err
 	}
 
-	err = q.processHeaders(queryParams, *headers)
+	err = q.processSelectors(params, resp, response)
 	if err != nil {
-		q.Response.Status = statuscode
-		return err
+		return nil, err
 	}
 
-	err = q.processSelectors(queryParams, bytes.NewReader(body))
-	if err != nil {
-		q.Response.Status = statuscode
-		return err
-	}
-
-	q.Response.Status = statuscode
-	return nil
+	return response, nil
 }
 
 // processHeaders ...
-func (q *QURL) processHeaders(queryParams url.Values, headers http.Header) error {
-	for _, v := range queryParams["header"] {
-		q.Response.Headers[v] = headers[v]
+func (q *QURL) processHeaders(params url.Values, headers http.Header, response *Response) error {
+	for _, v := range params["header"] {
+		response.Headers[v] = headers[v]
 	}
 	return nil
 }
 
 // processSelectors ...
-func (q *QURL) processSelectors(queryParams url.Values, body io.Reader) error {
-	// Build a DOM from response content
-	doc, err := goquery.NewDocumentFromReader(body)
+func (q *QURL) processSelectors(params url.Values, resp *http.Response, response *Response) error {
+	// Build a DOM from response
+	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
 		return err
 	}
-
 	// Query the DOM with all selectors
-	for _, v := range queryParams["selector"] {
-
+	for _, v := range params["selector"] {
 		// Process matching nodes
 		doc.Find(v).Each(func(index int, selection *goquery.Selection) {
-
 			// Node text
 			element := &Element{
 				Text: selection.Text(),
 			}
-
 			// Node attributes
 			for _, v := range selection.Nodes[0].Attr {
 				attr := &Attribute{
@@ -91,10 +79,8 @@ func (q *QURL) processSelectors(queryParams url.Values, body io.Reader) error {
 				}
 				element.Attributes = append(element.Attributes, attr)
 			}
-
-			q.Response.Selectors[v] = append(q.Response.Selectors[v], element)
+			response.Selectors[v] = append(response.Selectors[v], element)
 		})
 	}
-
 	return nil
 }

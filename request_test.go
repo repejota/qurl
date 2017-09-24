@@ -3,59 +3,12 @@
 package qurl
 
 import (
-	"fmt"
-	"log"
-	"net/http"
-	"os"
 	"testing"
 )
-
-func TestMain(m *testing.M) {
-	go func() {
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Fooo", "bar")
-			fmt.Fprintf(w, `
-				<html>
-					<head>
-						<title>Page Title</title>
-					</head>
-					<body>
-						<div class="classname">selector class content</div>
-						<div id="idname">selector id content</div>
-					</body>
-				</html>
-			`)
-		})
-		log.Println(http.ListenAndServe(":7070", nil))
-	}()
-	exitVal := m.Run()
-	os.Exit(exitVal)
-}
 
 func TestNewRequest(t *testing.T) {
 	request := NewRequest()
 	if request == nil {
 		t.Fatalf("Error on create an instance of Request")
-	}
-}
-
-func TestFetch(t *testing.T) {
-	request := NewRequest()
-	request.URL = "http://localhost:7070/"
-	status, _, _, err := request.Fetch()
-	if err != nil {
-		t.Fatal(err)
-	}
-	if status != 200 {
-		t.Fatalf("Fetch url expected to return code '200' but got %d", status)
-	}
-}
-
-func TestFetchFail(t *testing.T) {
-	request := NewRequest()
-	request.URL = "http://invalidhost"
-	status, _, _, _ := request.Fetch()
-	if status != 500 {
-		t.Fatalf("Fetch url expected to return code '500' but got %d", status)
 	}
 }
