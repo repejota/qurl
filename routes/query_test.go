@@ -10,7 +10,7 @@ import (
 )
 
 func TestQuery(t *testing.T) {
-	targetURL := "http://localhost:6060"
+	targetURL := "https://www.example.com"
 	requestURL := fmt.Sprintf("/q?url=%s", targetURL)
 	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
