@@ -30,8 +30,9 @@ func (r *Request) Fetch(url string) (*http.Response, error) {
 
 // FakeRequest ...
 type FakeRequest struct {
-	ExpectedStatusCode int
-	ExpectedBody       string
+	ExpectedStatusCode      int
+	ExpectedBody            string
+	ExpectedResponseHeaders http.Header
 }
 
 // Fetch performs an HTTP GET call to anURL and fetch the contents.
@@ -50,7 +51,7 @@ func (r *FakeRequest) Fetch(url string) (*http.Response, error) {
 		Body:          ioutil.NopCloser(bytes.NewBufferString(body)),
 		ContentLength: int64(len(body)),
 		Request:       req,
-		Header:        make(http.Header),
+		Header:        r.ExpectedResponseHeaders,
 	}
 	return resp, nil
 }

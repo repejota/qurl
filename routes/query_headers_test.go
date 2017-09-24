@@ -2,48 +2,64 @@
 
 package routes
 
-/*
+import (
+	"fmt"
+	"net/http"
+	"testing"
+
+	"github.com/repejota/qurl"
+)
+
 func TestHTTPHeaderNotPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&header=foobar", nil)
+	targetURL := "https://www.example.com"
+	requestURL := fmt.Sprintf("/q?url=%s&header=foobar", targetURL)
+	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	rec := httptest.NewRecorder()
-	handler := http.HandlerFunc(Query)
-
-	handler.ServeHTTP(rec, req)
-
-	var response qurl.Response
-	err = json.Unmarshal(rec.Body.Bytes(), &response)
-	if err != nil {
-		t.Fatalf("Unmarshaling response failed %v", err)
+	q := &qurl.QURL{}
+	freq := &qurl.FakeRequest{
+		ExpectedBody:       "",
+		ExpectedStatusCode: http.StatusOK,
 	}
-
-	if len(response.Headers["InvalidHeader"]) != 0 {
-		t.Fatalf("Response header 'InvalidHeader' expected to be an empty slice but got %v", response.Headers["InvalidHeader"])
+	response, err := q.Query(freq, req.URL.Query())
+	if response.Status != http.StatusOK {
+		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
+	}
+	if response.URL != targetURL {
+		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
+	}
+	if len(response.Headers["foobar"]) != 0 {
+		t.Fatalf("Response header 'foobar' expected to be an empty slice but got %v", response.Headers["foobar"])
 	}
 }
 
 func TestHTTPHeaderPresent(t *testing.T) {
-	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&header=Fooo", nil)
+	targetURL := "https://www.example.com"
+	requestURL := fmt.Sprintf("/q?url=%s&header=Content-Type", targetURL)
+	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	rec := httptest.NewRecorder()
-	handler := http.HandlerFunc(Query)
-
-	handler.ServeHTTP(rec, req)
-
-	var response qurl.Response
-	err = json.Unmarshal(rec.Body.Bytes(), &response)
-	if err != nil {
-		t.Fatalf("Unmarshaling response failed %v", err)
+	q := &qurl.QURL{}
+	rheaders := make(http.Header)
+	rheaders.Add("Content-Type", "text/html")
+	freq := &qurl.FakeRequest{
+		ExpectedBody:            "",
+		ExpectedStatusCode:      http.StatusOK,
+		ExpectedResponseHeaders: rheaders,
 	}
-
-	if len(response.Headers["Fooo"]) != 1 {
-		t.Fatalf("Response header 'Fooo' expected to have one element but got %v", response.Headers["Fooo"])
+	response, err := q.Query(freq, req.URL.Query())
+	if response.Status != http.StatusOK {
+		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
+	}
+	if response.URL != targetURL {
+		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
+	}
+	if len(response.Headers["Content-Type"]) != 1 {
+		t.Fatalf("Response header 'Content-Type' expected to have one element got %v", len(response.Headers["Content-Type"]))
+	}
+	if response.Headers["Content-Type"][0] != "text/html" {
+		t.Fatalf("Response header 'Content-Type' expected to be %s but got %s", "text/html", response.Headers["Content-Type"][0])
 	}
 }
-*/
