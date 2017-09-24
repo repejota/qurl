@@ -65,12 +65,12 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&header=Content-Type&s
 Qurl is really powerful and full of posibilities, that's why we have been
 creating an entire site that documents all the features you can use.
 
-Plesae refer to the [documentation](http://repejota.gitnub.io/qurl) website
+Plesae refer to the [documentation](https://repejota.github.io/qurl/) website
 where you'll gonna find accurated information aboug how to use the API that
 provides Qurl but also how to download, build and launch your own insgtance
 of the service.
 
-**[Visit the documentation](http://repejota.gitnub.io/qurl)**
+**[Visit the documentation](https://repejota.github.io/qurl/)**
 
 ## Continuous integration
 
