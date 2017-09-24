@@ -1,13 +1,11 @@
 // Copyright 2017 The qurl Authors. All rights reserved.
 
-package routes
+package qurl
 
 import (
 	"fmt"
 	"net/http"
 	"testing"
-
-	"github.com/repejota/qurl"
 )
 
 func TestHTTPHeaderNotPresent(t *testing.T) {
@@ -17,8 +15,8 @@ func TestHTTPHeaderNotPresent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	q := &qurl.QURL{}
-	freq := &qurl.FakeRequest{
+	q := &QURL{}
+	freq := &FakeRequest{
 		ExpectedBody:       "",
 		ExpectedStatusCode: http.StatusOK,
 	}
@@ -41,10 +39,10 @@ func TestHTTPHeaderPresent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	q := &qurl.QURL{}
+	q := &QURL{}
 	rheaders := make(http.Header)
 	rheaders.Add("Content-Type", "text/html")
-	freq := &qurl.FakeRequest{
+	freq := &FakeRequest{
 		ExpectedBody:            "",
 		ExpectedStatusCode:      http.StatusOK,
 		ExpectedResponseHeaders: rheaders,

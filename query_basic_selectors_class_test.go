@@ -1,6 +1,6 @@
 // Copyright 2017 The qurl Authors. All rights reserved.
 
-package routes
+package qurl
 
 /*
 func TestClassSelectorNotPresent(t *testing.T) {
@@ -14,7 +14,7 @@ func TestClassSelectorNotPresent(t *testing.T) {
 
 	handler.ServeHTTP(rec, req)
 
-	var response qurl.Response
+	var response Response
 	err = json.Unmarshal(rec.Body.Bytes(), &response)
 	if err != nil {
 		t.Fatalf("Unmarshaling response failed %v", err)
@@ -36,7 +36,7 @@ func TestClassSelectorPresent(t *testing.T) {
 
 	handler.ServeHTTP(rec, req)
 
-	var response qurl.Response
+	var response Response
 	err = json.Unmarshal(rec.Body.Bytes(), &response)
 	if err != nil {
 		t.Fatalf("Unmarshaling response failed %v", err)

@@ -1,13 +1,11 @@
 // Copyright 2017 The qurl Authors. All rights reserved.
 
-package routes
+package qurl
 
 import (
 	"fmt"
 	"net/http"
 	"testing"
-
-	"github.com/repejota/qurl"
 )
 
 func TestBasicSelectorTypeNotPresent(t *testing.T) {
@@ -17,8 +15,8 @@ func TestBasicSelectorTypeNotPresent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	q := &qurl.QURL{}
-	freq := &qurl.FakeRequest{
+	q := &QURL{}
+	freq := &FakeRequest{
 		ExpectedBody:       "<title>Page title</title>",
 		ExpectedStatusCode: http.StatusOK,
 	}
@@ -41,8 +39,8 @@ func TestBasicSelectorTypePresent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	q := &qurl.QURL{}
-	freq := &qurl.FakeRequest{
+	q := &QURL{}
+	freq := &FakeRequest{
 		ExpectedBody:       "<title>Page title</title>",
 		ExpectedStatusCode: http.StatusOK,
 	}
