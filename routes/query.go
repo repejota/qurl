@@ -22,15 +22,15 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Query the target URL and obtain data.
-	response, err := qurl.Query(queryParams)
+	// Query the target URL.
+	err = qurl.Query(queryParams)
 	if err != nil {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
 	}
 
 	// Builds the response with the obtained data.
-	responseJSON, err := json.Marshal(response)
+	responseJSON, err := json.Marshal(qurl.Response)
 	if err != nil {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return
