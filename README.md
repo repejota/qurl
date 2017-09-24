@@ -2,6 +2,7 @@
 
 [![License][License-Image]][License-Url]
 [![ReportCard][ReportCard-Image]][ReportCard-Url]
+[![GoDoc](https://godoc.org/github.com/repejota/qurl?status.svg)][GoDoc-Reference-Url]
 
 ## Table of contents
 
@@ -84,7 +85,6 @@ of the service.
 * Develop: [![Coverage Status](https://coveralls.io/repos/github/repejota/qurl/badge.svg?branch=develop)](https://coveralls.io/github/repejota/qurl?branch=develop)
 * Master: [![Coverage Status](https://coveralls.io/repos/github/repejota/qurl/badge.svg?branch=master)](https://coveralls.io/github/repejota/qurl?branch=master)
 
-
 ## License
 
 (The MIT License)
@@ -113,3 +113,4 @@ IN THE SOFTWARE.
 [License-Image]: https://img.shields.io/badge/License-MIT-blue.svg
 [ReportCard-Url]: http://goreportcard.com/report/repejota/qurl
 [ReportCard-Image]: http://goreportcard.com/badge/github.com/repejota/qurl
+[Godoc-Reference-Url]: http://godoc.org/github.com/repejota/qurl
