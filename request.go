@@ -30,6 +30,8 @@ func (r *Request) Fetch(url string) (*http.Response, error) {
 
 // FakeRequest ...
 type FakeRequest struct {
+	ExpectedStatusCode int
+	ExpectedBody       string
 }
 
 // Fetch performs an HTTP GET call to anURL and fetch the contents.
@@ -38,10 +40,10 @@ func (r *FakeRequest) Fetch(url string) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	body := "Hello world"
+	body := r.ExpectedBody
 	resp := &http.Response{
-		Status:        "200 OK",
-		StatusCode:    200,
+		Status:        http.StatusText(r.ExpectedStatusCode),
+		StatusCode:    r.ExpectedStatusCode,
 		Proto:         "HTTP/1.1",
 		ProtoMajor:    1,
 		ProtoMinor:    1,
