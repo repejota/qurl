@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 				</html>
 			`)
 		})
-		log.Fatal(http.ListenAndServe(":6060", nil))
+		log.Println(http.ListenAndServe(":6060", nil))
 	}()
 	exitVal := m.Run()
 	os.Exit(exitVal)
