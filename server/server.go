@@ -9,11 +9,6 @@ import (
 	"github.com/repejota/qurl/routes"
 )
 
-// QURLService ...
-type QURLService struct {
-	URL string
-}
-
 // Start starts the HTTP server for the qurl API microservice.
 func Start(address string, port string) {
 

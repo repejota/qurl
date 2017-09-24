@@ -67,4 +67,7 @@ docs-clean:
 
 .PHONY: docs-serve
 docs-serve:
-	cd docs-src && hugo server -D 
+	cd docs-src && hugo server -D
+
+godoc-serve:
+	godoc -http=":9090"

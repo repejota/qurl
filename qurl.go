@@ -34,33 +34,34 @@ func (q *QURL) SetURL(u string) error {
 		return err
 	}
 	q.URL = u
+	q.Request.URL = q.URL
 	q.Response.URL = q.URL
 	return nil
 }
 
 // Query queries the URL and process all the data we want to fetch.
-func (q *QURL) Query(queryParams url.Values) (*Response, error) {
+func (q *QURL) Query(queryParams url.Values) error {
 	// Fetch URL content
-	statuscode, headers, body, err := q.Request.Fetch(q.URL)
+	statuscode, headers, body, err := q.Request.Fetch()
 	if err != nil {
 		q.Response.Status = statuscode
-		return q.Response, err
+		return err
 	}
 
 	err = q.processHeaders(queryParams, *headers)
 	if err != nil {
 		q.Response.Status = statuscode
-		return q.Response, err
+		return err
 	}
 
 	err = q.processSelectors(queryParams, bytes.NewReader(body))
 	if err != nil {
 		q.Response.Status = statuscode
-		return q.Response, err
+		return err
 	}
 
 	q.Response.Status = statuscode
-	return q.Response, nil
+	return nil
 }
 
 // processHeaders ...

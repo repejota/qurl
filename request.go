@@ -7,19 +7,20 @@ import (
 	"net/http"
 )
 
-// Request ...
+// Request represents the call being made to retrieve the contents of an URL.
 type Request struct {
+	URL string `json:"url"`
 }
 
-// NewRequest ...
+// NewRequest returns a new request instance.
 func NewRequest() *Request {
 	r := Request{}
 	return &r
 }
 
-// Fetch ...
-func (r *Request) Fetch(url string) (int, *http.Header, []byte, error) {
-	resp, err := http.Get(url)
+// Fetch performs an HTTP GET call to anURL and fetch the contents.
+func (r *Request) Fetch() (int, *http.Header, []byte, error) {
+	resp, err := http.Get(r.URL)
 	if err != nil {
 		return http.StatusInternalServerError, nil, nil, err
 	}
