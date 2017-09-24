@@ -12,9 +12,7 @@ import (
 // Query route fetch an URL and queries the response to get data.
 func Query(w http.ResponseWriter, r *http.Request) {
 	queryParams := r.URL.Query()
-	q := &qurl.QURL{
-		URL: queryParams.Get("url"),
-	}
+	q := &qurl.QURL{}
 	req := &qurl.Request{}
 	// Query the target URL.
 	response, err := q.Query(req, queryParams)

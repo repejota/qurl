@@ -11,33 +11,27 @@ import (
 
 // QURL is the main interface for the microservice.
 type QURL struct {
-	URL string
 }
 
 // Query queries the URL and process all the data we want to fetch.
 func (q *QURL) Query(rr HTTPClient, params url.Values) (*Response, error) {
-	q.URL = params.Get("url")
-
+	url := params.Get("url")
 	response := NewResponse()
-	response.URL = q.URL
-
+	response.URL = url
 	// Fetch URL content
-	resp, err := rr.Fetch(q.URL)
+	resp, err := rr.Fetch(url)
 	if err != nil {
 		return response, err
 	}
 	response.Status = resp.StatusCode
-
 	err = q.processHeaders(params, resp.Header, response)
 	if err != nil {
 		return nil, err
 	}
-
 	err = q.processSelectors(params, resp, response)
 	if err != nil {
 		return nil, err
 	}
-
 	return response, nil
 }
 

@@ -16,9 +16,7 @@ func TestQuery(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	q := &qurl.QURL{
-		URL: targetURL,
-	}
+	q := &qurl.QURL{}
 	freq := &qurl.FakeRequest{}
 	response, err := q.Query(freq, req.URL.Query())
 	if response.Status != http.StatusOK {
