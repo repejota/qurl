@@ -4,6 +4,7 @@ package qurl
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"testing"
@@ -25,7 +26,7 @@ func TestMain(m *testing.M) {
 				</html>
 			`)
 		})
-		http.ListenAndServe(":6060", nil)
+		log.Fatal(http.ListenAndServe(":6060", nil))
 	}()
 	exitVal := m.Run()
 	os.Exit(exitVal)
