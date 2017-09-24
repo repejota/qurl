@@ -2,15 +2,7 @@
 
 package routes
 
-import (
-	"encoding/json"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-
-	"github.com/repejota/qurl"
-)
-
+/*
 func TestClassSelectorNotPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=.notpresent", nil)
 	if err != nil {
@@ -54,3 +46,4 @@ func TestClassSelectorPresent(t *testing.T) {
 		t.Fatalf("Response selector '.classname' expected to have one element but got %v", len(response.Selectors[".classname"]))
 	}
 }
+*/

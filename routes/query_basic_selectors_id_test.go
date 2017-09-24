@@ -2,15 +2,7 @@
 
 package routes
 
-import (
-	"encoding/json"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-
-	"github.com/repejota/qurl"
-)
-
+/*
 func TestIDSelectorNotPresent(t *testing.T) {
 	req, err := http.NewRequest("GET", "/q?url=http://localhost:6060&selector=%23unexistentid", nil)
 	if err != nil {
@@ -58,3 +50,4 @@ func TestIDSelectorPresent(t *testing.T) {
 		t.Fatalf("Response selector '#idname' expected to be 'selector id content' but got '%v'", response.Selectors["#idname"][0])
 	}
 }
+*/

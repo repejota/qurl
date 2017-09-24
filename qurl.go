@@ -9,27 +9,25 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// QURL is the main ingterface for the microservice.
+// QURL is the main interface for the microservice.
 type QURL struct {
 	URL string
 }
 
 // NewQURL creates an instance of QURL.
 func NewQURL() *QURL {
-	qurl := QURL{}
-	return &qurl
+	return &QURL{}
 }
 
 // Query queries the URL and process all the data we want to fetch.
-func (q *QURL) Query(params url.Values) (*Response, error) {
+func (q *QURL) Query(rr HTTPClient, params url.Values) (*Response, error) {
 	q.URL = params.Get("url")
 
 	response := NewResponse()
 	response.URL = q.URL
 
 	// Fetch URL content
-	request := NewRequest()
-	resp, err := request.Fetch(q.URL)
+	resp, err := rr.Fetch(q.URL)
 	if err != nil {
 		return response, err
 	}
