@@ -8,8 +8,8 @@ import (
 	"net/http"
 )
 
-// HTTPClient ...
-type HTTPClient interface {
+// IRequest ...
+type IRequest interface {
 	Fetch(url string) (*http.Response, error)
 }
 

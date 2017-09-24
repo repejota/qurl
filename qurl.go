@@ -14,12 +14,12 @@ type QURL struct {
 }
 
 // Query queries the URL and process all the data we want to fetch.
-func (q *QURL) Query(rr HTTPClient, params url.Values) (*Response, error) {
+func (q *QURL) Query(ir IRequest, params url.Values) (*Response, error) {
 	url := params.Get("url")
 	response := NewResponse()
 	response.URL = url
 	// Fetch URL content
-	resp, err := rr.Fetch(url)
+	resp, err := ir.Fetch(url)
 	if err != nil {
 		return response, err
 	}
