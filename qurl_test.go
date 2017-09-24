@@ -20,6 +20,9 @@ func TestQuery(t *testing.T) {
 		ExpectedStatusCode: http.StatusOK,
 	}
 	response, err := q.Query(freq, req.URL.Query())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if response.Status != http.StatusOK {
 		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
 	}
@@ -41,6 +44,9 @@ func TestQueryInvalidURL(t *testing.T) {
 		ExpectedStatusCode: http.StatusInternalServerError,
 	}
 	response, err := q.Query(freq, req.URL.Query())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if response.Status != http.StatusInternalServerError {
 		t.Errorf("response status expected to be %d but got %d", http.StatusInternalServerError, response.Status)
 	}
@@ -62,6 +68,9 @@ func TestFailFetchURL(t *testing.T) {
 		ExpectedStatusCode: http.StatusInternalServerError,
 	}
 	response, err := q.Query(freq, req.URL.Query())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if response.Status != http.StatusInternalServerError {
 		t.Errorf("response status expected to be %d but got %d", http.StatusInternalServerError, response.Status)
 	}

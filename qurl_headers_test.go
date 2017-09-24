@@ -21,6 +21,9 @@ func TestHTTPHeaderNotPresent(t *testing.T) {
 		ExpectedStatusCode: http.StatusOK,
 	}
 	response, err := q.Query(freq, req.URL.Query())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if response.Status != http.StatusOK {
 		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
 	}
@@ -48,6 +51,9 @@ func TestHTTPHeaderPresent(t *testing.T) {
 		ExpectedResponseHeaders: rheaders,
 	}
 	response, err := q.Query(freq, req.URL.Query())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if response.Status != http.StatusOK {
 		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
 	}
