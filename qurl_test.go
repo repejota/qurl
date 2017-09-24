@@ -14,27 +14,3 @@ func TestNewQURL(t *testing.T) {
 		t.Fatalf("QURL Response url expected to be %s but got %s", expectedURL, qurl.Response.URL)
 	}
 }
-
-func TestSetURL(t *testing.T) {
-	expectedURL := "https://www.example.com"
-	qurl := NewQURL()
-	err := qurl.SetURL(expectedURL)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if qurl.URL != expectedURL {
-		t.Fatalf("QURL url expected to be %s but got %s", expectedURL, qurl.URL)
-	}
-	if qurl.Response.URL != expectedURL {
-		t.Fatalf("QURL Response url expected to be %s but got %s", expectedURL, qurl.Response.URL)
-	}
-}
-
-func TestSetURLInvalid(t *testing.T) {
-	expectedURLInvalid := "foo"
-	qurl := NewQURL()
-	err := qurl.SetURL(expectedURLInvalid)
-	if err.Error() != "parse foo: invalid URI for request" {
-		t.Fatal(err)
-	}
-}

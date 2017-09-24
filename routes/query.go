@@ -15,15 +15,8 @@ func Query(w http.ResponseWriter, r *http.Request) {
 
 	qurl := qurl.NewQURL()
 
-	// Sets and validates target URL.
-	err := qurl.SetURL(queryParams.Get("url"))
-	if err != nil {
-		http.Error(w, "INVALID_URL", http.StatusBadRequest)
-		return
-	}
-
 	// Query the target URL.
-	err = qurl.Query(queryParams)
+	err := qurl.Query(queryParams)
 	if err != nil {
 		http.Error(w, "INTERNAL_ERROR", http.StatusInternalServerError)
 		return

@@ -27,20 +27,12 @@ func NewQURL() *QURL {
 	return &qurl
 }
 
-// SetURL validates and sets the target URL to be queried.
-func (q *QURL) SetURL(u string) error {
-	_, err := url.ParseRequestURI(u)
-	if err != nil {
-		return err
-	}
-	q.URL = u
-	q.Request.URL = q.URL
-	q.Response.URL = q.URL
-	return nil
-}
-
 // Query queries the URL and process all the data we want to fetch.
 func (q *QURL) Query(queryParams url.Values) error {
+	q.URL = queryParams.Get("url")
+	q.Request.URL = q.URL
+	q.Response.URL = q.URL
+
 	// Fetch URL content
 	statuscode, headers, body, err := q.Request.Fetch()
 	if err != nil {
