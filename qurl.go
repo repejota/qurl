@@ -14,11 +14,6 @@ type QURL struct {
 	URL string
 }
 
-// NewQURL creates an instance of QURL.
-func NewQURL() *QURL {
-	return &QURL{}
-}
-
 // Query queries the URL and process all the data we want to fetch.
 func (q *QURL) Query(rr HTTPClient, params url.Values) (*Response, error) {
 	q.URL = params.Get("url")

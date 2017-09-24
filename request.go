@@ -17,11 +17,6 @@ type HTTPClient interface {
 type Request struct {
 }
 
-// NewRequest returns a new request instance.
-func NewRequest() *Request {
-	return &Request{}
-}
-
 // Fetch performs an HTTP GET call to anURL and fetch the contents.
 func (r *Request) Fetch(url string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -35,11 +30,6 @@ func (r *Request) Fetch(url string) (*http.Response, error) {
 
 // FakeRequest ...
 type FakeRequest struct {
-}
-
-// NewFakeRequest returns a new request instance.
-func NewFakeRequest() *FakeRequest {
-	return &FakeRequest{}
 }
 
 // Fetch performs an HTTP GET call to anURL and fetch the contents.
