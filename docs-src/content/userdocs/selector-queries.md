@@ -62,6 +62,7 @@ The *attributes* for each mathing element from a *selector* is also a list as th
 $ curl -s 'http://localhost:8080/q?url=https://example.com&selector=meta' | json_pp
 {
    "url" : "https://example.com",
+   "status" : 200,
    "selectors" : {
       "meta" : [
          {
@@ -100,8 +101,7 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&selector=meta' | json
             "text" : ""
          }
       ]
-   },
-   "status" : 200
+   }
 }
 ```
 
