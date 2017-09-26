@@ -1,16 +1,25 @@
 ---
 title: "Selector Queries"
+description: "Fetch any content from any URL easyly with Qurl just using simple
+or complex! standard CSS selectors."
 date: 2017-09-24T00:35:28+02:00
 draft: false
 weight: 3
 ---
-This is by far, the most powerful and useful feature of *Qurl*. You can use all the power of *CSS selectors* to retrieve any matching content of the target URL. 
+This is by far, the most powerful and useful feature of *Qurl*. You can use all
+the power of *CSS selectors* to retrieve any matching content of the target
+URL.
 
-Using *Qurl* query selectors you get an automated content scraping API tool of remote URL contents without needing any external dependencies neither any browser or aditional *HTML* parser/analyzer.
+Using *Qurl* query selectors you get an automated content scraping API tool of
+remote URL contents without needing any external dependencies neither any
+browser or aditional *HTML* parser/analyzer.
 
-Just calling *Qurl* simple API you will be able to do the same than with other more complex less powerful tools and also in less time and resources.
+Just calling *Qurl* simple API you will be able to do the same than with other
+more complex less powerful tools and also in less time and resources.
 
 ### Basic Selectors
+
+foo bar
 
 #### Type Selectors
 
