@@ -32,27 +32,13 @@ main .devdocs-toc ul {
     padding: 0;
 }
 
-main blockquote {
-    background: #f9f9f9;
-    border-left: 10px solid #ccc;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
-    quotes: "\201C""\201D""\2018""\2019";
-}
-main blockquote:before {
-    color: #ccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-}
-main blockquote p {
-    display: inline;
+main pre {
+    font-family: "courier new", courier, monospace;
+    font-size: 0.8em;
 }
 
 footer {
     background-color: #ecf0f1;
-    padding: 15px 0;
+    padding: 15px 0 30px 0;
     font-size: 0.8em;
 }
