@@ -10,7 +10,7 @@ import (
 
 func TestIDSelectorNotPresent(t *testing.T) {
 	targetURL := "https://www.example.com"
-	requestURL := fmt.Sprintf("/q?url=%s&selector=.foo", targetURL)
+	requestURL := fmt.Sprintf("/q?url=%s&selector=#foo", targetURL)
 	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -30,14 +30,14 @@ func TestIDSelectorNotPresent(t *testing.T) {
 	if response.URL != targetURL {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
-	if len(response.Selectors[".foo"]) != 0 {
-		t.Fatalf("Response selector '.foo' expected to have zero elements but got '%v'", len(response.Selectors[".foo"]))
+	if len(response.Selectors["#foo"]) != 0 {
+		t.Fatalf("Response selector '#foo' expected to have zero elements but got '%v'", len(response.Selectors["#foo"]))
 	}
 }
 
 func TestIDSelectorPresent(t *testing.T) {
 	targetURL := "https://www.example.com"
-	requestURL := fmt.Sprintf("/q?url=%s&selector=.content", targetURL)
+	requestURL := fmt.Sprintf("/q?url=%s&selector=#content", targetURL)
 	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -57,10 +57,10 @@ func TestIDSelectorPresent(t *testing.T) {
 	if response.URL != targetURL {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
-	if len(response.Selectors[".content"]) != 1 {
-		t.Fatalf("Response selector '.content' expected to have one element but got '%v'", len(response.Selectors[".content"]))
+	if len(response.Selectors["#content"]) != 1 {
+		t.Fatalf("Response selector '#content' expected to have one element but got '%v'", len(response.Selectors["#content"]))
 	}
-	if response.Selectors[".content"][0].Text != "Page content" {
-		t.Fatalf("Response selector '.content' expected to be %s but got %s", "Page content", response.Selectors[".content"][0].Text)
+	if response.Selectors["#content"][0].Text != "Page content" {
+		t.Fatalf("Response selector '#content' expected to be %s but got %s", "Page content", response.Selectors["#content"][0].Text)
 	}
 }
