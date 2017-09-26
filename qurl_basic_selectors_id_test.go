@@ -17,7 +17,7 @@ func TestIDSelectorNotPresent(t *testing.T) {
 	}
 	q := &QURL{}
 	freq := &FakeRequest{
-		ExpectedBody:       `<p class="content">Page content</title>`,
+		ExpectedBody:       `<p id="content">Page content</title>`,
 		ExpectedStatusCode: http.StatusOK,
 	}
 	response, err := q.Query(freq, req.URL.Query())
@@ -37,20 +37,20 @@ func TestIDSelectorNotPresent(t *testing.T) {
 
 func TestIDSelectorPresent(t *testing.T) {
 	targetURL := "https://www.example.com"
-	requestURL := fmt.Sprintf("/q?url=%s&selector=#content", targetURL)
-	req, err := http.NewRequest("GET", requestURL, nil)
+	req, err := http.NewRequest("GET", "/q?url="+targetURL+"&selector=%23content", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	q := &QURL{}
 	freq := &FakeRequest{
-		ExpectedBody:       `<p class="content">Page content</title>`,
+		ExpectedBody:       `<p id="content">Page content</title>`,
 		ExpectedStatusCode: http.StatusOK,
 	}
 	response, err := q.Query(freq, req.URL.Query())
 	if err != nil {
 		t.Fatal(err)
 	}
+	fmt.Println(response.Selectors)
 	if response.Status != http.StatusOK {
 		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
 	}
