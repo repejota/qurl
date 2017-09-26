@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>QURL Documentation</title>    
+    <title>QURL Documentation : </title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://repejota.github.io/qurl/css/styles.css">
-    <meta name="generator" content="Hugo 0.28-DEV" />
+    <meta name="generator" content="Hugo 0.30-DEV" />
 </head>
 <body>
 <header>
     <div class="container">
-        <h1>QURL Documentation</h1>
+        <h1></h1>
     </div>
 </header>
 <main> 
@@ -23,15 +23,12 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p><em>Qurl</em> is a drop-in and easy to deploy microservice who exposes an HTTP API you
-can use to extract content from any web page as JSON.</p>
+<p><em>Qurl</em> is a drop-in and easy to deploy microservice who exposes an <em>HTTP API</em>
+you can use to extract content from any web page as <em>JSON</em>. Any information
+available at a given public <em>URL</em> can be extracted using selector queries
+(check examples below).</p>
 
-<p>Qurl is a drop-in and easy to deploy microservice who exposes an HTTP API you
-can use to extract content from any web page as JSON. Any information available
-at a given public URL can be extracted using selector queries (check examples
-below).</p>
-
-<p>Example:</p>
+<p>Quick example:</p>
 
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://example.com&amp;header=Content-Type&amp;selector=meta' | json_pp
 {
