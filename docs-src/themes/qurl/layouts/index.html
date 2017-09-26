@@ -5,18 +5,13 @@
     </div>
     <div class="container userdocs-toc">
         <h2>User documentation</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-        natoque penatibus et magnis dis parturient montes, nascetur 
-        ridiculus mus.</p>
+        <p>The following sections documents all the features that can be used
+        with Qurl.</p>
         <ul>
         {{ range (where .Site.RegularPages "Section" "userdocs") }}
             <li>
                 <h4><a href="{{ .URL }}">{{ .Title }}</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                natoque penatibus et magnis dis parturient montes, nascetur 
-                ridiculus mus.</p>
+                <p>{{ .Description }}</p>
             </li>
         {{ end }}
         </ul>
