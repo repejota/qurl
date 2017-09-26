@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>QURL Documentation</title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/zenburn.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://repejota.github.io/qurl/css/styles.css">
     <meta name="generator" content="Hugo 0.28-DEV" />
@@ -26,37 +26,71 @@
 <p><em>Qurl</em> is a drop-in and easy to deploy microservice who exposes an HTTP API you
 can use to extract content from any web page as JSON.</p>
 
+<p>Qurl is a drop-in and easy to deploy microservice who exposes an HTTP API you
+can use to extract content from any web page as JSON. Any information available
+at a given public URL can be extracted using selector queries (check examples
+below).</p>
+
+<p>Example:</p>
+
+<pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://example.com&amp;header=Content-Type&amp;selector=meta' | json_pp
+{
+   &quot;url&quot; : &quot;https://example.com&quot;,
+   &quot;status&quot; : 200,
+   &quot;selectors&quot; : {
+      &quot;meta&quot; : [
+         {
+            &quot;text&quot; : &quot;&quot;,
+            &quot;attributes&quot; : [
+               {
+                 &quot;key&quot; : &quot;charset&quot;,
+                  &quot;value&quot; : &quot;utf-8&quot;
+               }
+            ]
+         },
+         {
+           &quot;text&quot; : &quot;&quot;,
+            &quot;attributes&quot; : [
+               {
+                  &quot;key&quot; : &quot;name&quot;,
+                  &quot;value&quot; : &quot;viewport&quot;
+               },
+               {
+                 &quot;key&quot; : &quot;content&quot;,
+                  &quot;value&quot; : &quot;width=device-width, initial-scale=1&quot;
+               }
+            ]
+         }
+      ]
+   },
+   &quot;headers&quot; : {
+      &quot;Content-Type&quot; : [
+         &quot;text/html; charset=utf-8&quot;
+      ]
+   }
+}
+</code></pre>
+
     </div>
     <div class="container userdocs-toc">
         <h2>User documentation</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-        natoque penatibus et magnis dis parturient montes, nascetur 
-        ridiculus mus.</p>
+        <p>The following sections documents all the features that can be used
+        with Qurl.</p>
         <ul>
         
             <li>
                 <h4><a href="/qurl/userdocs/basic-usage/">Basic Usage</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                natoque penatibus et magnis dis parturient montes, nascetur 
-                ridiculus mus.</p>
+                <p>This section shows you the most basic usage of Qurl, it does not provide too much documentation about what you can do with it but shows the most important information and error responses.</p>
             </li>
         
             <li>
                 <h4><a href="/qurl/userdocs/header-queries/">Header Queries</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                natoque penatibus et magnis dis parturient montes, nascetur 
-                ridiculus mus.</p>
+                <p>With Qurl you can fetch any header the server is returning on each HTTP Request.</p>
             </li>
         
             <li>
                 <h4><a href="/qurl/userdocs/selector-queries/">Selector Queries</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                natoque penatibus et magnis dis parturient montes, nascetur 
-                ridiculus mus.</p>
+                <p>Fetch any content from any URL easyly with Qurl just using simple or complex! standard CSS selectors.</p>
             </li>
         
         </ul>
@@ -64,26 +98,16 @@ can use to extract content from any web page as JSON.</p>
  
     <div class="container devdocs-toc">
         <h2>Developer documentation</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-        natoque penatibus et magnis dis parturient montes, nascetur 
-        ridiculus mus.</p>
         <ul>
         
             <li>
                 <h4><a href="/qurl/devdocs/installation/">Installation</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                natoque penatibus et magnis dis parturient montes, nascetur 
-                ridiculus mus.</p>
+                <p>How to build Qurl from sources, install and execute it on any host.</p>
             </li>
         
             <li>
-                <h4><a href="/qurl/devdocs/building-from-sources/">Building From Sources</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                natoque penatibus et magnis dis parturient montes, nascetur 
-                ridiculus mus.</p>
+                <h4><a href="/qurl/devdocs/deployment/">Deployment</a></h4>
+                <p>Qurl can be deployed on multiple hosting providers. This documentation list a few of them with detailed and step by step information to about how reproduce it.</p>
             </li>
         
         </ul>

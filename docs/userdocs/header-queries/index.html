@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Header Queries</title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/zenburn.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://repejota.github.io/qurl/css/styles.css">
     <meta name="generator" content="Hugo 0.28-DEV" />
@@ -19,7 +19,8 @@
 </header>
 <main>
     <div class="container">
-    <p>Get any HTTP headers defined in the response, just adding a <code>header</code> parameter with the name of the header you want to get as value to the URL query.</p>
+    <p>Get any HTTP headers defined in the response, just adding a <code>header</code> parameter
+with the name of the header you want to get as value to the URL query.</p>
 
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Content-Type' | json_pp
 {
@@ -34,10 +35,12 @@
 </code></pre>
 
 <ul>
-<li>Notice that the resulting value is not an string but a list of strings. This is because a single header can have multiple values in the same response.</li>
+<li>Notice that the resulting value is not an string but a list of strings. This
+is because a single header can have multiple values in the same response.</li>
 </ul>
 
-<p>In this case we will also return a list of values for the response header so you&rsquo;ll be able to iterate over them.</p>
+<p>In this case we will also return a list of values for the response header so
+you&rsquo;ll be able to iterate over them.</p>
 
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Set-Cookie' | json_pp
 {
@@ -53,7 +56,8 @@
 }
 </code></pre>
 
-<p>It is possible also to query more than one response header at once. Just append as much <code>header</code> parameters with their names as you neeed to the query URL.</p>
+<p>It is possible also to query more than one response header at once. Just append
+as much <code>header</code> parameters with their names as you neeed to the query URL.</p>
 
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Date&amp;header=Cache-Control' | json_pp
 {
@@ -71,7 +75,8 @@
  
 </code></pre>
 
-<p>If the header you query is not present in the response, we will still add it to the result and its value will be <code>null</code>.</p>
+<p>If the header you query is not present in the response, we will still add it to
+the result and its value will be <code>null</code>.</p>
 
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=foobar' | json_pp
 {
@@ -83,7 +88,9 @@
 }
 </code></pre>
 
-<p>Finally if you query for an specific header more than once, the result will be only populated once so bandwitch will be saved and the response data will be simpler.</p>
+<p>Finally if you query for an specific header more than once, the result will be
+only populated once so bandwitch will be saved and the response data will be
+simpler.</p>
 
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://github.com&amp;header=Date&amp;header=Date' | json_pp
 {
@@ -98,9 +105,16 @@
 </code></pre>
 
 <ul>
-<li>Mozila Developer Network website offers good and accurated documentation about what <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP Headers</a> are their use. Their documentation is also available in multiple languages.</li>
-<li>For an updated list of standarizeed HTTP Headers, you can check the <a href="https://tools.ietf.org/html/rfc4229">RFC4229</a> and the <a href="https://www.iana.org/assignments/message-headers/message-headers.xhtml">IANA Message Headers</a> document.</li>
-<li>Wikipedia also maintains a list of standard and non-standard <a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields">Response HTTP Headers</a> in case you want more information.</li>
+<li>Mozila Developer Network website offers good and accurated documentation
+about what <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP Headers</a>
+are their use. Their documentation is also available in multiple languages.</li>
+<li>For an updated list of standarizeed HTTP Headers, you can check the
+<a href="https://tools.ietf.org/html/rfc4229">RFC4229</a> and the
+<a href="https://www.iana.org/assignments/message-headers/message-headers.xhtml">IANA Message Headers</a>
+document.</li>
+<li>Wikipedia also maintains a list of standard and non-standard
+<a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields">Response HTTP Headers</a>
+in case you want more information.</li>
 </ul>
 
     </div>

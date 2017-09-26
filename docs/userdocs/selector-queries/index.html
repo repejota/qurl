@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Selector Queries</title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/zenburn.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://repejota.github.io/qurl/css/styles.css">
     <meta name="generator" content="Hugo 0.28-DEV" />
@@ -21,13 +21,20 @@
     <div class="container">
     
 
-<p>This is by far, the most powerful and useful feature of <em>Qurl</em>. You can use all the power of <em>CSS selectors</em> to retrieve any matching content of the target URL.</p>
+<p>This is by far, the most powerful and useful feature of <em>Qurl</em>. You can use all
+the power of <em>CSS selectors</em> to retrieve any matching content of the target
+URL.</p>
 
-<p>Using <em>Qurl</em> query selectors you get an automated content scraping API tool of remote URL contents without needing any external dependencies neither any browser or aditional <em>HTML</em> parser/analyzer.</p>
+<p>Using <em>Qurl</em> query selectors you get an automated content scraping API tool of
+remote URL contents without needing any external dependencies neither any
+browser or aditional <em>HTML</em> parser/analyzer.</p>
 
-<p>Just calling <em>Qurl</em> simple API you will be able to do the same than with other more complex less powerful tools and also in less time and resources.</p>
+<p>Just calling <em>Qurl</em> simple API you will be able to do the same than with other
+more complex less powerful tools and also in less time and resources.</p>
 
 <h3 id="basic-selectors">Basic Selectors</h3>
+
+<p>foo bar</p>
 
 <h4 id="type-selectors">Type Selectors</h4>
 
@@ -76,6 +83,7 @@
 <pre><code class="language-javascript">$ curl -s 'http://localhost:8080/q?url=https://example.com&amp;selector=meta' | json_pp
 {
    &quot;url&quot; : &quot;https://example.com&quot;,
+   &quot;status&quot; : 200,
    &quot;selectors&quot; : {
       &quot;meta&quot; : [
          {
@@ -114,8 +122,7 @@
             &quot;text&quot; : &quot;&quot;
          }
       ]
-   },
-   &quot;status&quot; : 200
+   }
 }
 </code></pre>
 
