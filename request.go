@@ -3,34 +3,55 @@
 package qurl
 
 import (
+	"bytes"
 	"io/ioutil"
 	"net/http"
 )
 
-// Request represents the call being made to retrieve the contents of an URL.
-type Request struct {
-	URL string `json:"url"`
+// IRequest ...
+type IRequest interface {
+	Fetch(url string) (*http.Response, error)
 }
 
-// NewRequest returns a new request instance.
-func NewRequest() *Request {
-	r := Request{}
-	return &r
+// Request represents the call being made to retrieve the contents of an URL.
+type Request struct {
 }
 
 // Fetch performs an HTTP GET call to anURL and fetch the contents.
-func (r *Request) Fetch() (int, *http.Header, []byte, error) {
-	resp, err := http.Get(r.URL)
+func (r *Request) Fetch(url string) (*http.Response, error) {
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return http.StatusInternalServerError, nil, nil, err
+		return nil, err
 	}
-	body, err := ioutil.ReadAll(resp.Body)
+	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
+	return client.Do(req)
+}
+
+// FakeRequest ...
+type FakeRequest struct {
+	ExpectedStatusCode      int
+	ExpectedBody            string
+	ExpectedResponseHeaders http.Header
+}
+
+// Fetch performs an HTTP GET call to anURL and fetch the contents.
+func (r *FakeRequest) Fetch(url string) (*http.Response, error) {
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return resp.StatusCode, nil, nil, err
+		return nil, err
 	}
-	err = resp.Body.Close()
-	if err != nil {
-		return resp.StatusCode, nil, nil, err
+	body := r.ExpectedBody
+	resp := &http.Response{
+		Status:        http.StatusText(r.ExpectedStatusCode),
+		StatusCode:    r.ExpectedStatusCode,
+		Proto:         "HTTP/1.1",
+		ProtoMajor:    1,
+		ProtoMinor:    1,
+		Body:          ioutil.NopCloser(bytes.NewBufferString(body)),
+		ContentLength: int64(len(body)),
+		Request:       req,
+		Header:        r.ExpectedResponseHeaders,
 	}
-	return resp.StatusCode, &resp.Header, body, err
+	return resp, nil
 }
