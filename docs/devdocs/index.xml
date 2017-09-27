@@ -17,7 +17,9 @@
       <pubDate>Sun, 24 Sep 2017 00:28:50 +0200</pubDate>
       
       <guid>https://repejota.github.io/qurl/devdocs/installation/</guid>
-      <description></description>
+      <description>To install Qurl the most easy way is to use the golang tooling and execute the following:
+$ go get install github.com/repejota/qurl  If you have already installed a previous version of Qurl, you can upgrade it using the -u flag like this:
+$ go get -u install github.com/repejota/qurl  Building from sources If you want to get the latest version or execute the development version of Qurl you can build it from sources:</description>
     </item>
     
     <item>
