@@ -13,3 +13,5 @@
 .vscode/
 
 vendor/*/
+
+coverage-all.out

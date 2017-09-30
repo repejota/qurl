@@ -49,7 +49,6 @@ github.com/repejota/qurl/request.go:39.65,41.16 2 12
 github.com/repejota/qurl/request.go:44.2,56.18 3 12
 github.com/repejota/qurl/request.go:41.16,43.3 1 0
 github.com/repejota/qurl/response.go:30.30,36.2 2 12
-github.com/repejota/qurl/routes/teapot.go:11.53,14.2 2 1
 github.com/repejota/qurl/routes/query.go:13.52,19.16 5 0
 github.com/repejota/qurl/routes/query.go:24.2,25.16 2 0
 github.com/repejota/qurl/routes/query.go:30.2,32.23 3 0
@@ -61,3 +60,4 @@ github.com/repejota/qurl/routes/query.go:24.2,25.16 2 0
 github.com/repejota/qurl/routes/query.go:30.2,32.23 3 0
 github.com/repejota/qurl/routes/query.go:19.16,22.3 2 0
 github.com/repejota/qurl/routes/query.go:25.16,28.3 2 0
+github.com/repejota/qurl/routes/teapot.go:11.53,14.2 2 1
