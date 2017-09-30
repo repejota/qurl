@@ -31,7 +31,7 @@ func TestHTTPHeaderNotPresent(t *testing.T) {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
 	if len(response.Headers["foobar"]) != 0 {
-		t.Fatalf("Response header 'foobar' expected to be an empty slice but got %v", response.Headers["foobar"])
+		t.Fatalf("response header 'foobar' expected to be an empty slice but got %v", response.Headers["foobar"])
 	}
 }
 
@@ -61,9 +61,9 @@ func TestHTTPHeaderPresent(t *testing.T) {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
 	if len(response.Headers["Content-Type"]) != 1 {
-		t.Fatalf("Response header 'Content-Type' expected to have one element got %v", len(response.Headers["Content-Type"]))
+		t.Fatalf("response header 'Content-Type' expected to have one element got %v", len(response.Headers["Content-Type"]))
 	}
 	if response.Headers["Content-Type"][0] != "text/html" {
-		t.Fatalf("Response header 'Content-Type' expected to be %s but got %s", "text/html", response.Headers["Content-Type"][0])
+		t.Fatalf("response header 'Content-Type' expected to be %s but got %s", "text/html", response.Headers["Content-Type"][0])
 	}
 }

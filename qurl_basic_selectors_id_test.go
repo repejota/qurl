@@ -31,7 +31,7 @@ func TestIDSelectorNotPresent(t *testing.T) {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
 	if len(response.Selectors["#foo"]) != 0 {
-		t.Fatalf("Response selector '#foo' expected to have zero elements but got '%v'", len(response.Selectors["#foo"]))
+		t.Fatalf("response selector '#foo' expected to have zero elements but got '%v'", len(response.Selectors["#foo"]))
 	}
 }
 
@@ -50,7 +50,6 @@ func TestIDSelectorPresent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	fmt.Println(response.Selectors)
 	if response.Status != http.StatusOK {
 		t.Errorf("response status expected to be %d but got %d", http.StatusOK, response.Status)
 	}
@@ -58,9 +57,9 @@ func TestIDSelectorPresent(t *testing.T) {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
 	if len(response.Selectors["#content"]) != 1 {
-		t.Fatalf("Response selector '#content' expected to have one element but got '%v'", len(response.Selectors["#content"]))
+		t.Fatalf("response selector '#content' expected to have one element but got '%v'", len(response.Selectors["#content"]))
 	}
 	if response.Selectors["#content"][0].Text != "Page content" {
-		t.Fatalf("Response selector '#content' expected to be %s but got %s", "Page content", response.Selectors["#content"][0].Text)
+		t.Fatalf("response selector '#content' expected to be %s but got %s", "Page content", response.Selectors["#content"][0].Text)
 	}
 }
