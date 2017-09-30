@@ -82,7 +82,7 @@ Usage of qurl:
         Show version information
 ```
 
-### Deployment
+### Deployment
 
 You can also deploy *Qurl* on Heroku with this one click button:
 
