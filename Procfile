@@ -1,1 +1,1 @@
-web: qurl --port $PORT
+web: qurl
