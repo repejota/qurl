@@ -1,0 +1,10 @@
+{
+	"comment": "Qurl vendor dependencies",
+	"ignore": "test",
+	"package": [],
+	"rootPath": "github.com/repejota/qurl",
+	"heroku": {
+    	"install" : [ "./..." ],
+        "goVersion": "go1.6"
+    }
+}

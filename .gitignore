@@ -11,3 +11,5 @@
 .glide/
 
 .vscode/
+
+vendor/*/
