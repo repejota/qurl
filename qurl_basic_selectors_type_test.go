@@ -31,7 +31,7 @@ func TestBasicSelectorTypeNotPresent(t *testing.T) {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
 	if len(response.Selectors["foo"]) != 0 {
-		t.Fatalf("Response selector 'foo' expected to have zero elements but got '%v'", len(response.Selectors["foo"]))
+		t.Fatalf("response selector 'foo' expected to have zero elements but got '%v'", len(response.Selectors["foo"]))
 	}
 }
 
@@ -58,9 +58,9 @@ func TestBasicSelectorTypePresent(t *testing.T) {
 		t.Errorf("response url expected to be %s but got %s", targetURL, response.URL)
 	}
 	if len(response.Selectors["title"]) != 1 {
-		t.Fatalf("Response selector 'title' expected to have one element but got '%v'", len(response.Selectors["title"]))
+		t.Fatalf("response selector 'title' expected to have one element but got '%v'", len(response.Selectors["title"]))
 	}
 	if response.Selectors["title"][0].Text != "Page title" {
-		t.Fatalf("Response selector 'title' expected to be %s but got %s", "Page title", response.Selectors["title"][0].Text)
+		t.Fatalf("response selector 'title' expected to be %s but got %s", "Page title", response.Selectors["title"][0].Text)
 	}
 }
