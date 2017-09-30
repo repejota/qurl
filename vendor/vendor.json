@@ -1,10 +1,37 @@
 {
 	"comment": "Qurl vendor dependencies",
-	"ignore": "test",
-	"package": [],
-	"rootPath": "github.com/repejota/qurl",
 	"heroku": {
-    	"install" : [ "./..." ],
-        "goVersion": "go1.9"
-    }
+		"goVersion": "go1.9",
+		"install": [
+			"./..."
+		]
+	},
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "HeAOIQS+TI75+Afm0qgKXdg+37I=",
+			"path": "github.com/PuerkitoBio/goquery",
+			"revision": "63e7f870c2298e42bfc8b200db92e175a3e71120",
+			"revisionTime": "2017-09-29T10:56:09Z"
+		},
+		{
+			"checksumSHA1": "2rWSos1D+xqNSGkvEMOG3pntod8=",
+			"path": "github.com/andybalholm/cascadia",
+			"revision": "349dd0209470eabd9514242c688c403c0926d266",
+			"revisionTime": "2016-12-24T14:14:13Z"
+		},
+		{
+			"checksumSHA1": "/PGQlVbw8jILX3tLQaYAg6bTAFI=",
+			"path": "golang.org/x/net/html",
+			"revision": "0a9397675ba34b2845f758fe3cd68828369c6517",
+			"revisionTime": "2017-07-19T03:24:12Z"
+		},
+		{
+			"checksumSHA1": "uMRr2bnIJS+9Xm0FqMBYUTzaSGs=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "0a9397675ba34b2845f758fe3cd68828369c6517",
+			"revisionTime": "2017-07-19T03:24:12Z"
+		}
+	],
+	"rootPath": "github.com/repejota/qurl"
 }
