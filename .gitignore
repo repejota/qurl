@@ -11,3 +11,7 @@
 .glide/
 
 .vscode/
+
+vendor/*/
+
+coverage-all.out

@@ -61,6 +61,33 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&header=Content-Type&s
 }
 ```
 
+## Installation
+
+To install *Qurl*:
+
+```bash
+go get -u github.com/kardianos/govendor
+```
+
+And execute the server:
+
+```bash
+$ qurl --help
+Usage of qurl:
+  -address string
+        Server address
+  -port string
+        Server port (default "8080")
+  -version
+        Show version information
+```
+
+### Deployment
+
+You can also deploy *Qurl* on Heroku with this one click button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Documentation
 
 Qurl is really powerful and full of posibilities, that's why we have been

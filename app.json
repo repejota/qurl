@@ -1,0 +1,6 @@
+{
+    "name": "Qurl",
+    "description": "Qurl is a drop-in and easy to deploy microservice who exposes an HTTP API you can use to extract content from any web page as JSON.",
+    "repository": "https://github.com/repejota/qurl",
+    "keywords": ["microservice", "http", "api", "scaper", "golang", "json", "server", "html", "css-selector", "http-header"]
+  }
