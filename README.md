@@ -61,6 +61,10 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&header=Content-Type&s
 }
 ```
 
+## Installation
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Documentation
 
 Qurl is really powerful and full of posibilities, that's why we have been
