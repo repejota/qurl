@@ -22,6 +22,12 @@ clean:
 	go clean
 	rm -rf coverage-all.out
 
+# Docker
+
+.PHONY: docker
+docker: clean
+	docker build -t qurl .
+
 # Testing
 
 .PHONY: test
