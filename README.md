@@ -66,7 +66,7 @@ $ curl -s 'http://localhost:8080/q?url=https://example.com&header=Content-Type&s
 To install *Qurl*:
 
 ```bash
-go get -u github.com/kardianos/govendor
+go get -u github.com/repejota/qurl
 ```
 
 And execute the server:

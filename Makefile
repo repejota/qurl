@@ -1,3 +1,5 @@
+BINARY="qurl"
+DOCKER-IMAGE="repejota/qurl"
 VERSION=`cat VERSION`
 BUILD=`git symbolic-ref HEAD 2> /dev/null | cut -b 12-`-`git log --pretty=format:%h -1`
 PACKAGES = "./..."
@@ -12,7 +14,7 @@ install: clean
 
 .PHONY: build
 build: clean
-	go build $(LDFLAGS) -v $(PACKAGES)
+	go build $(LDFLAGS) -v ./cmd/$(BINARY)
 
 .PHONY: version
 version:
@@ -21,16 +23,29 @@ version:
 .PHONY: clean
 clean:
 	go clean
+	rm -rf $(BINARY)
 	rm -rf coverage-all.out
 
 # Docker
 
 .PHONY: docker
 docker: clean
-	docker build -t qurl .
+	docker build -t $(DOCKER-IMAGE) .
+	docker tag $(DOCKER-IMAGE) $(DOCKER-IMAGE):$(VERSION)
+	docker push $(DOCKER-IMAGE)
+	docker rmi $(DOCKER-IMAGE)
+	docker rmi $(DOCKER-IMAGE):$(VERSION)
+
+docker-scratch: clean build
+	docker build -t $(DOCKER-IMAGE):scratch -f Dockerfile.scratch .
+	docker tag $(DOCKER-IMAGE):scratch $(DOCKER-IMAGE):scratch-$(VERSION)
+	docker push $(DOCKER-IMAGE)
+	docker rmi $(DOCKER-IMAGE):scratch
+	docker rmi $(DOCKER-IMAGE):scratch-$(VERSION)
+	rm -rf qurl
 
 docker-run: clean
-	docker run -it --rm --name qurl qurl
+	docker run -it --rm --name $(BINARY) $(DOCKER-IMAGE)
 
 # Testing
 

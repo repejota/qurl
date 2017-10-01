@@ -15,3 +15,5 @@
 vendor/*/
 
 coverage-all.out
+
+qurl
