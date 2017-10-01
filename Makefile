@@ -6,11 +6,12 @@ PACKAGES = "./..."
 # values
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD}"
 
-install:
+.PHONY: build
+install: clean
 	go install $(LDFLAGS) -v $(PACKAGES)
 
 .PHONY: build
-build:
+build: clean
 	go build $(LDFLAGS) -v $(PACKAGES)
 
 .PHONY: version
@@ -22,17 +23,23 @@ clean:
 	go clean
 	rm -rf coverage-all.out
 
+# Docker
+
+.PHONY: docker
+docker: clean
+	docker build -t qurl .
+
+docker-run: clean
+	docker run -it --rm --name qurl qurl
+
 # Testing
 
-.PHONY: test
 test:
 	go test -v $(PACKAGES)
 
-.PHONY: cover
 cover:
 	go test -cover $(PACKAGES)
 
-.PHONY: cover-html
 cover-html:
 	echo "mode: count" > coverage-all.out
 	$(foreach pkg,$(shell go list ./...),\
@@ -57,15 +64,12 @@ dev-deps:
 
 # Documentation
 
-.PHONY: docs
 docs: docs-clean
 	 cd docs-src && hugo
 
-.PHONY: docs-clean
 docs-clean:
 	 rm -rf docs/* 
 
-.PHONY: docs-serve
 docs-serve:
 	cd docs-src && hugo server -D
 
